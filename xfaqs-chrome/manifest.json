@@ -1,0 +1,37 @@
+{
+	"manifest_version": 2,
+
+	"name": "xFAQs",
+	"author": "Judgmenl",
+	"description": "Improvements for GameFAQs",
+	"version": "0.4",
+	"homepage_url": "http://weblab.cs.uml.edu/~rdupuis/xfaqs/",
+
+	"icons": { "16": "data/img/icon.png", "48": "data/img/icon.png", "128": "data/img/icon.png" },
+	
+	"content_scripts":
+		[
+			{
+				"matches": ["http://*.gamefaqs.com/*"],
+				"js": [	"data/jquery-2.1.1.min.js", 
+						"data/jquery-ui.min.js", 
+						"data/jquery.csv-0.71.min.js", 
+						"data/highlight.min.js", 
+						"data/storage.js", 
+						"data/settings.js", 
+						"data/gamefaqs-avatars.js", 
+						"data/modules.js", 
+						"data/quick-topic.js", 
+						"data/rotating-sigs.js", 
+						"data/quick-edit.js", 
+						"data/webm.js", 
+						"data/tti.js",
+						"data/amp.js"],
+				"css": ["data/xfaqs-main.css", "data/default.min.css"],
+				"run_at": "document_end"
+			}			
+		],
+		
+	"update_url": "http://weblab.cs.uml.edu/~rdupuis/xfaqs/chrome-update.xml"
+  
+}

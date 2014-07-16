@@ -1,0 +1,11 @@
+{
+  "name": "xfaqs-firefox",
+  "title": "xFAQs",
+  "id": "jid1-CCz6AsSViTfMgg",
+  "description": "GameFAQs Improvements",
+  "author": "Judgmenl",
+  "license": "MPL 2.0",
+  "version": "0.14",
+  "icon": "data/img/icon.png",
+  "icon64": "data/img/icon.png"
+}

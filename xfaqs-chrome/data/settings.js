@@ -1,0 +1,430 @@
+
+function ignoreCallback(i) {
+	return function() {
+		ignoreList.users.splice(i, 1);
+		localStorage.setItem("ignoreList", JSON.stringify(ignoreList));
+		document.location = "/boards/user.php?settings=1#tabs-4";
+		location.reload(true);
+	}
+
+}
+
+function clickCallback(i) {
+	return function() {
+
+		$(".btn").attr("disabled", "disabled");
+		
+		highlightList.groups.splice((i-1), 1);
+	
+		var userNameArray = $.csv.toArray($("#userNames-" + i).val());
+			
+		highlightList.groups.push( 
+			{
+				"groupName": $("#groupName-" + i).val(),
+				"color": $("#color-" + i).val(),
+				"userNames": userNameArray
+			});
+
+	
+		localStorage.setItem("highlightList", JSON.stringify(highlightList));
+		document.location = "/boards/user.php?settings=1#tabs-3";
+		location.reload(true);
+	}
+}
+
+function deleteCallback(i) {
+	return function() {
+		$("#table-" + i).remove();
+		$(".btn").attr("disabled", "disabled");
+		
+		highlightList.groups.splice((i-1), 1);
+		localStorage.setItem("highlightList", JSON.stringify(highlightList));
+
+		
+		document.location = "/boards/user.php?settings=1#tabs-3";
+		location.reload(true);
+
+	}
+}
+
+function sigClickCallback(i) {
+	return function() {
+		var sigText = $("#signature-" + i).val();
+		var sigLines = (sigText.match(/\n/g)||[]).length;
+		var sigCharacters = sigText.length + sigLines;
+	
+		if((sigLines <= 1) && (sigCharacters <= 160)) { 
+
+			$(".btn").attr("disabled", "disabled");
+			
+			sigList.signatures.splice((i-1), 1);	
+			
+			var boardNameArray = $.csv.toArray($("#boards-" + i).val());
+			var accountNameArray = $.csv.toArray($("#accounts-" + i).val());
+				
+			sigList.signatures.push( 
+				{
+					"boards": boardNameArray,
+					"accounts": accountNameArray,
+					"signature": $("#signature-" + i).val()
+				});
+
+
+			localStorage.setItem("sigList", JSON.stringify(sigList));
+			document.location = "/boards/user.php?settings=1#tabs-5";
+			location.reload(true);
+		} else {
+			alert("Signature is too long. " + sigLines + " breaks and " + sigCharacters + " characters.");
+		}
+	}
+}
+
+function sigDeleteCallback(i) {
+	return function() {
+		$("#sigTable-" + i).remove();
+		$(".btn").attr("disabled", "disabled");
+		
+		sigList.signatures.splice((i-1), 1);
+		localStorage.setItem("sigList", JSON.stringify(sigList));
+
+		
+		document.location = "/boards/user.php?settings=1#tabs-5";
+		location.reload(true);
+
+	}
+}
+
+var sigBody = "<p>1 line break and 160 characters allowed. Just like with regular sigs</p>";
+var sigNumber = 0;
+
+for( sigNumber; sigNumber < sigList.signatures.length; sigNumber++) {
+
+	sigBody +=	"<table id='sigTable-" + (sigNumber + 1) + "'>" +
+							"<tr><th colspan='2'>Signature " + (sigNumber + 1) + " <input type='submit' class='btn' id='sigBtn-" + (sigNumber + 1) + "' style='float:right; margin-left:10px;' value='Update'><input type='submit' class='btn' id='sigDeleteBtn-" + (sigNumber + 1) + "' style='float:right' value='Delete'></th></tr>" +
+							"<tr><td>Board Names</td><td><input id='boards-" + (sigNumber + 1) + "' style='width:100%' value=\"" + sigList.signatures[sigNumber].boards + "\"></td></tr>" +
+							"<tr><td>Accounts</td><td><input id='accounts-" + (sigNumber + 1) + "' style='width:100%' value=\"" + sigList.signatures[sigNumber].accounts + "\"></td></tr>" +
+							"<tr><td>Signature</td><td><textarea id='signature-" + (sigNumber + 1) + "' style='width:100%'>" + sigList.signatures[sigNumber].signature + "</textarea></td></tr>" +
+						"</table>";
+
+}
+
+sigBody +=	"<table id='sigTable-'" + (sigNumber + 1) + ">" +
+						"<tr><th colspan='2'> New Signature <input type='submit' class='btn' id='sigBtn-" + (sigNumber + 1) + "' style='float:right' value='Add'></th></tr>" +
+						"<tr><td>Board Names</td><td><input id='boards-" + (sigNumber + 1) + "' style='width:100%' value=\"" + "" + "\"></td></tr>" +
+						"<tr><td>Accounts</td><td><input id='accounts-" + (sigNumber + 1) + "' style='width:100%' value=\"" + "" + "\"></td></tr>" +
+						"<tr><td>Signature</td><td><textarea id='signature-" + (sigNumber + 1) + "' style='width:100%' value=\"" + "" + "\"></textarea></td></tr>" +
+					"</table>";
+
+
+var ignoreBody = "<table><tr><th>Ignore List+</th></tr>";
+var ignoreNumber = 0;
+
+for( ignoreNumber; ignoreNumber < ignoreList.users.length; ignoreNumber++) {
+	ignoreBody += "<tr><td>" + ignoreList.users[ignoreNumber] + " - <a id='ignore-" + ignoreNumber + "'>remove</a></tr></td>";
+}
+
+ignoreBody += "</table>";
+
+var highlightBody = "<p>Note: No spaces between user names - just commas.</p>";
+var groupNumber = 0;
+
+for( groupNumber; groupNumber < highlightList.groups.length; groupNumber++) {
+
+	highlightBody +=	"<table id='table-" + (groupNumber + 1) + "'>" +
+							"<tr><th colspan='2'>Highlight Group " + (groupNumber + 1) + " <input type='submit' class='btn' id='highlightBtn-" + (groupNumber + 1) + "' style='float:right; margin-left:10px;' value='Update'><input type='submit' class='btn' id='deleteBtn-" + (groupNumber + 1) + "' style='float:right' value='Delete'></th></tr>" +
+							"<tr><td>Name</td><td><input id='groupName-" + (groupNumber + 1) + "' style='width:100%' value=\"" + highlightList.groups[groupNumber].groupName + "\"></td></tr>" +
+							"<tr><td>Color</td><td><input type='color' id='color-" + (groupNumber + 1) + "' value=\"" + highlightList.groups[groupNumber].color + "\"></td></tr>" +
+							"<tr><td>Users</td><td><input id='userNames-" + (groupNumber + 1) + "' style='width:100%' value=\"" + highlightList.groups[groupNumber].userNames + "\"></td></tr>" +
+						"</table>";
+
+}
+
+highlightBody +=	"<table id='table-'" + (groupNumber + 1) + ">" +
+						"<tr><th colspan='2'> New Highlight Group <input type='submit' class='btn' id='highlightBtn-" + (groupNumber + 1) + "' style='float:right' value='Add'></th></tr>" +
+						"<tr><td>Name</td><td><input id='groupName-" + (groupNumber + 1) + "' style='width:100%' value=\"" + "" + "\"></td></tr>" +
+						"<tr><td>Color</td><td><input type='color' id='color-" + (groupNumber + 1) + "' value=\"" + "" + "\"></td></tr>" +
+						"<tr><td>Users</td><td><input id='userNames-" + (groupNumber + 1) + "' style='width:100%' value=\"" + "" + "\"></td></tr>" +
+					"</table>";
+						
+						
+$(".masthead_user").prepend("<a href='/boards/user.php?settings=1'>xFAQs Settings <i class='icon icon-cog'></i></a> ");
+
+
+if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20')) == "1") && (location.pathname == "/boards/user.php")) {
+	
+	var user = $("html.js body.wf-active div.wrapper div#mantle_skin div#content.container div.main_content div.span8 div.body table.board tbody tr td").eq(0).text();
+	$(".span4").remove();
+	$(".span8").css("width", "100%");
+	
+	// GameWeasel Fix
+	if( user == "") {
+		var user = $("#content > div > div > div.body > table > tbody > tr:nth-child(1) > td").text();
+	}	
+	
+	var upload_user = user + " ";
+
+	$(".page-title").html("xFAQs Settings");
+	$(".userinfo").css("border", "none");
+	$(".title").remove();
+	$(".head").remove();
+	
+	// Preparing for the UI
+	$("tbody").empty();    
+		
+	// Renders the Upload UI	
+	if( user ) {
+	
+		$("tbody").append( "<div id='xfaqs-tabs'>" +
+							   "<ul class='content_nav content_nav_wrap'>" +
+							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-1'>General Settings</a></li>" +
+							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-2'>Avatar Settings</a></li>" +
+  							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-3'>User Highlighting</a></li>" +
+  							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-4'>Ignore List+</a></li>" +
+  							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-5'>Rotating Signatures</a></li>" +
+							   "</ul>" +
+							   
+							   "<div id='tabs-1' style='padding-top:20px'>" +
+							   "<table class='contrib'>" +
+							   "<tr><th colspan='2'>General Settings</th></tr>" +
+							   "<tr><td>Embedded WebM Videos</td><td><select id='enableWebm'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Improved < code > tags</td><td><select id='enableCode'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Quick Edit</td><td><select id='enableQuickEdit'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Quick Topic</td><td><select id='enableQuickTopic'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Enable Avatars</td><td><select id='enableAvatars'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>User Highlighting</td><td><select id='enableHighlight'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Ignore+</td><td><select id='enableIgnore'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Board Selector (not implemented)</td><td><select id='enableBoardSelector'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Rotating Signatures</td><td><select id='enableRotatingSigs'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>AMP in Board Navigation</td><td><select id='enableAMP'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><th colspan='2'>Text to Image</th></tr>" +
+							   "<tr><td>Text to Image</td><td><select id='enableTTI'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>TTI maximum height</td><td><input id='maxHeight' value=''>px</td>" +
+							   "<tr><td>TTI maximum width</td><td><input id='maxWidth' value=''>px</td>" +
+							   "<tr><td colspan='2'><input type='submit' id='updateGeneral' class='btn' value='Update xFAQs Settings'><span style='float:right;'><form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'><input type='hidden' name='cmd' value='_s-xclick'><input type='hidden' name='hosted_button_id' value='XABH3W5N9JNCQ'><input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'><img alt='paypal' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'></form></span></td></tr>" +
+							   "</table>" +
+							   "</div>" +
+							   
+							   
+							   "<div id='tabs-2' style='padding-top:20px'>" +
+									
+									"<div style='float:left; width:100px; height:100px;'><img class='avatar' src='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/" + user + ".png' alt='' ></div>" +
+									"<div style='float:left; padding-left:10px'><h4>Global Avatar Settings</h4> <ul id=settings class='paginate user' style='margin:0;padding:0;'> \
+										<li><a href='' id='av_left'>Avatars to the Left</a></li><li><a href='' id='av_right'>Avatars to the Right</a></li><li><a href='' id='av_no'>No Avatars</a></li></ul> \
+										<form id='submit' method='POST' enctype='multipart/form-data' > \
+										<input class='btn' type='file' name='file' accept='image/*' id='file'> \
+										<input class='btn btn_primary' type='button' id='submit_btn' value='Upload'> \
+										<input style='display:none' type='text' name='dest' value='GameFAQs-Avatars'> \
+										<input style='display:none' type='text' name='user' value='" + upload_user + "'> \
+										<span id='server_message'>Maximum File Size: 200KB</span> \
+										</form></div>" +
+										
+										"<div style='clear:both;padding-top:30px;'>Before uploading an avatar, you must change your Signature to upload:ok (<a href='http://puu.sh/9yTZJ/3acde356e0.png' target='_blank'>Example</a>). \
+											You can do that on <a href='http://www.gamefaqs.com/boards/sigquote.php' target='_blank'>this</a> page. You can change your signature back after the avatar is uploaded.</div>" +
+											
+							   "</div>" +
+   							   "<div id='tabs-3' style='padding-top:20px'>" + highlightBody + "</div>" +
+   							   "<div id='tabs-4' style='padding-top:20px'>" + ignoreBody + "</div>" +
+   							   "<div id='tabs-5' style='padding-top:20px'>" + sigBody + "</div>" +
+							"</div>");
+						   
+		$(function() {
+			$("#xfaqs-tabs").tabs();
+		});
+
+		
+		for(var i = 0; i < groupNumber; i++) {
+				
+			$("#highlightBtn-" + (i + 1)).button();
+			$("#highlightBtn-" + (i + 1)).click(clickCallback(i + 1));
+
+			$("#deleteBtn-" + (i + 1)).button();
+			$("#deleteBtn-" + (i + 1)).click(deleteCallback(i + 1));
+
+		
+		}
+		
+		for(var i = 0; i < ignoreNumber; i++) {				
+			$("#ignore-" + i).click(ignoreCallback(i));		
+		}
+		
+		
+		$("#highlightBtn-" + (groupNumber + 1)).button();
+		$("#highlightBtn-" + (groupNumber + 1)).click(function() {
+			$(".btn").attr("disabled", "disabled");
+			
+			var userNameArray = $.csv.toArray($("#userNames-" + (groupNumber + 1)).val());
+			
+			highlightList.groups.push( 
+				{
+					"groupName": $("#groupName-" + (groupNumber + 1)).val(),
+					"color": $("#color-" + (groupNumber + 1)).val(),
+					"userNames": userNameArray
+				});
+				
+			localStorage.setItem("highlightList", JSON.stringify(highlightList));
+			
+			document.location = "/boards/user.php?settings=1#tabs-3";
+			location.reload(true);
+		});
+		
+
+
+		for(var i = 0; i < sigNumber; i++) {
+				
+			$("#sigBtn-" + (i + 1)).button();
+			$("#sigBtn-" + (i + 1)).click(sigClickCallback(i + 1));
+
+			$("#sigDeleteBtn-" + (i + 1)).button();
+			$("#sigDeleteBtn-" + (i + 1)).click(sigDeleteCallback(i + 1));
+
+		
+		}
+		
+		$("#sigBtn-" + (sigNumber + 1)).button();
+		$("#sigBtn-" + (sigNumber + 1)).click(function() {
+			var sigText = $("#signature-" + (sigNumber + 1)).val();
+			var sigLines = (sigText.match(/\n/g)||[]).length;
+			var sigCharacters = sigText.length + sigLines;
+		
+			if((sigLines <= 1) && (sigCharacters <= 160)) { 
+				$(".btn").attr("disabled", "disabled");
+				
+				var boardNameArray = $.csv.toArray($("#boards-" + (sigNumber + 1)).val());
+				var accountNameArray = $.csv.toArray($("#accounts-" + (sigNumber + 1)).val());
+				
+				sigList.signatures.push( 
+					{
+						"boards": boardNameArray,
+						"accounts": accountNameArray,
+						"signature": sigText
+					});
+					
+				localStorage.setItem("sigList", JSON.stringify(sigList));
+				
+				document.location = "/boards/user.php?settings=1#tabs-5";
+				location.reload(true);
+			} else {
+				alert("Signature is too long. " + sigLines + " breaks and " + sigCharacters + " characters.");
+			}
+		});
+
+		
+		
+		// sets options.		
+		$("#enableWebm").val(enableWebm);
+		$("#enableCode").val(enableCode);
+		$("#enableQuickEdit").val(enableQuickEdit);
+		$("#enableQuickTopic").val(enableQuickTopic);
+		$("#enableAvatars").val(enableAvatars);
+		$("#enableHighlight").val(enableHighlight);
+		$("#enableIgnore").val(enableIgnore);
+		$("#enableBoardSelector").val(enableBoardSelector);
+		$("#enableTTI").val(enableTTI);
+		$("#maxWidth").val(maxWidth);
+		$("#maxHeight").val(maxHeight);
+		$("#enableRotatingSigs").val(enableRotatingSigs);
+		$("#enableAMP").val(enableAMP);
+
+
+		// Updates General Settings	
+		$("#updateGeneral").button();
+		$("#updateGeneral").click(function(event) {
+			$("#updateGeneral").attr("disabled", "disabled");
+			$("#updateGeneral").val("Updating Settings. Please Wait.");
+			
+			localStorage.setItem("enableWebm", $("#enableWebm").val());
+			localStorage.setItem("enableCode", $("#enableCode").val());
+			localStorage.setItem("enableQuickEdit", $("#enableQuickEdit").val());
+			localStorage.setItem("enableQuickTopic", $("#enableQuickTopic").val());
+			localStorage.setItem("enableAvatars", $("#enableAvatars").val());
+			localStorage.setItem("enableHighlight", $("#enableHighlight").val());
+			localStorage.setItem("enableIgnore", $("#enableIgnore").val());
+			localStorage.setItem("enableBoardSelector", $("#enableBoardSelector").val());
+			localStorage.setItem("enableTTI", $("#enableTTI").val());
+			localStorage.setItem("maxWidth", $("#maxWidth").val());
+			localStorage.setItem("maxHeight", $("#maxHeight").val());
+			localStorage.setItem("enableRotatingSigs", $("#enableRotatingSigs").val());
+			localStorage.setItem("enableAMP", $("#enableAMP").val());
+			document.location = "/boards/user.php?settings=1#tabs-1";
+			location.reload(true);
+		});
+		
+		
+
+		
+	}
+	
+	
+	/* error checking when handling the upload */	
+
+	$("#file").change(function() {
+	
+		var file = this.files[0];
+		var size = file.size;
+		var type = file.type;
+		
+		if( !type.match(/image.*/) ) {
+			$("#submit_btn").css("display", "none");
+			$("#server_message").html("Invalid File Type");
+			return;		
+		}
+		
+		if( size > 204800 ) {
+			$("#submit_btn").css("display", "none");
+			$("#server_message").html("Image is too big (" + size/1024 + "KB). 200KB maximum.");
+			return;
+		}
+		
+		if( !user ) {
+			$("#submit_btn").css("display", "none");
+			$("#server_message").html("Log in to upload avatars.");
+		}
+		
+		$("#submit_btn").css("display", "inline");
+		$("#server_message").html("OK");
+	
+		
+
+	});
+	
+	/* ajax request to handle the upload */
+
+	$("#submit_btn").click( function() {
+	
+	
+	
+		var formData = new FormData($('#submit')[0]);
+	
+		$("#server_message").html("Uploading...");
+	
+		$.ajax( {
+			url: "http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/upload-v2.php",
+			dataType: "html",
+			type: "POST",
+			data: formData,
+			processData: false,
+			contentType: false
+		}).done(function( data ) {
+			$("#server_message").html(data);
+			if( data == 'Upload Successful! Refreshing to apply changes...') {
+				location.reload(true);
+			}
+		});
+		
+	});
+	
+	
+	/* storage setters */
+	$("#av_left").click( function() {
+		localStorage.setItem("avatar", "left");
+	});
+	
+	$("#av_right").click( function() {
+		localStorage.setItem("avatar", "right");
+	});
+	
+	$("#av_no").click( function() {
+		localStorage.setItem("avatar", "no");
+	});
+
+}

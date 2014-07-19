@@ -37,8 +37,5 @@
 				"css": ["data/xfaqs-main.css", "data/default.min.css", "data/spectrum.css"],
 				"run_at": "document_end"
 			}			
-		],
-		
-	"update_url": "http://weblab.cs.uml.edu/~rdupuis/xfaqs/chrome-update.xml"
-  
+		]  
 }

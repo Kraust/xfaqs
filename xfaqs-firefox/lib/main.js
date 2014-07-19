@@ -11,6 +11,7 @@ pageMod.PageMod({
 						data.url("jquery.csv-0.71.min.js"), 
 						data.url("highlight.min.js"), 
 						data.url("spectrum.js"),
+						data.url("filesaver.js"),						
 						data.url("storage.js"), 
 						data.url("settings.js"), 
 						data.url("gamefaqs-avatars.js"), 
@@ -20,7 +21,12 @@ pageMod.PageMod({
 						data.url("quick-edit.js"), 
 						data.url("webm.js"), 
 						data.url("tti.js"),
-						data.url("amp.js")],
+						data.url("amp.js"),
+						data.url("tracked-topics.js"),
+						data.url("board-selector.js"),
+						data.url("export-import.js"),
+						data.url("hotkeys.js"),
+						data.url("badges.js")],
 
 	contentScriptWhen: "ready"
 });

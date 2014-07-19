@@ -1,3 +1,4 @@
+var importSigList = "";
 
 function ignoreCallback(i) {
 	return function() {
@@ -94,7 +95,7 @@ function sigDeleteCallback(i) {
 	}
 }
 
-var sigBody = "<p>1 line break and 160 characters allowed. Just like with regular sigs</p>";
+var sigBody = "<p>1 line break and 160 characters allowed. Just like with regular sigs <span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span></p>";
 var sigNumber = 0;
 
 for( sigNumber; sigNumber < sigList.signatures.length; sigNumber++) {
@@ -189,7 +190,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 							   "<div id='tabs-1' style='padding-top:20px'>" +
 							   "<table class='contrib'>" +
 							   "<tr><th colspan='2'>General Settings</th></tr>" +
-							   "<tr><td>Embedded WebM Videos</td><td><select id='enableWebm'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Embedded WebM Videos</td><td><select id='enableWebm'><option value='type-1'>Type 1</option><option value='type-2'>Type 2</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Improved < code > tags</td><td><select id='enableCode'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Quick Edit</td><td><select id='enableQuickEdit'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Quick Topic</td><td><select id='enableQuickTopic'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
@@ -199,8 +200,9 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 							   "<tr><td>Board Selector (not implemented)</td><td><select id='enableBoardSelector'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Rotating Signatures</td><td><select id='enableRotatingSigs'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>AMP in Board Navigation</td><td><select id='enableAMP'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Tracked Topics in Board Navigation</td><td><select id='enableTracked'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><th colspan='2'>Text to Image</th></tr>" +
-							   "<tr><td>Text to Image</td><td><select id='enableTTI'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Text to Image</td><td><select id='enableTTI'><option value='type-1'>Type 1</option><option value='type-2'>Type 2</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>TTI maximum height</td><td><input id='maxHeight' value=''>px</td>" +
 							   "<tr><td>TTI maximum width</td><td><input id='maxWidth' value=''>px</td>" +
 							   "<tr><td colspan='2'><input type='submit' id='updateGeneral' class='btn' value='Update xFAQs Settings'><span style='float:right;'><form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'><input type='hidden' name='cmd' value='_s-xclick'><input type='hidden' name='hosted_button_id' value='XABH3W5N9JNCQ'><input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'><img alt='paypal' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'></form></span></td></tr>" +
@@ -326,6 +328,47 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		});
 
 		
+		$("#exportSigs").click(function() {
+			var oMyBlob = new Blob([localStorage.sigList], {type : 'application/octet-stream'});
+			var url = URL.createObjectURL(oMyBlob);
+			
+			window.open(url, '_blank');
+		});
+		
+		
+		// This is off of SO: http://stackoverflow.com/questions/11046919/how-do-i-read-a-text-file-on-my-local-disk-into-a-variable-in-javascript
+		function handleFileSelect(evt) {
+			var files = evt.target.files; // FileList object
+
+			// Loop through the FileList
+			for (var i = 0, f; f = files[i]; i++) {
+
+			var reader = new FileReader();
+
+			// Closure to capture the file information.
+			reader.onload = (function(theFile) {
+				return function(e) {
+					importSigList = e.target.result;
+					$("#importSigs").removeAttr("disabled");
+				};
+			})(f);
+
+			// Read in the file
+			//reader.readAsDataText(f,UTF-8);
+			//reader.readAsDataURL(f);
+
+			reader.readAsText(f);
+			}
+		}
+		document.getElementById('importSigFiles').addEventListener('change', handleFileSelect, false);
+		
+		// This is off of SO
+		
+		$("#importSigs").click(function() {
+			localStorage.setItem("sigList", importSigList);
+			document.location = "/boards/user.php?settings=1#tabs-5";
+			location.reload(true);
+		});
 		
 		// sets options.		
 		$("#enableWebm").val(enableWebm);
@@ -341,6 +384,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$("#maxHeight").val(maxHeight);
 		$("#enableRotatingSigs").val(enableRotatingSigs);
 		$("#enableAMP").val(enableAMP);
+		$("#enableTracked").val(enableTracked);
 
 
 		// Updates General Settings	
@@ -362,10 +406,10 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			localStorage.setItem("maxHeight", $("#maxHeight").val());
 			localStorage.setItem("enableRotatingSigs", $("#enableRotatingSigs").val());
 			localStorage.setItem("enableAMP", $("#enableAMP").val());
+			localStorage.setItem("enableTracked", $("#enableTracked").val());
 			document.location = "/boards/user.php?settings=1#tabs-1";
 			location.reload(true);
 		});
-		
 		
 
 		
@@ -443,5 +487,6 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 	$("#av_no").click( function() {
 		localStorage.setItem("avatar", "no");
 	});
+	
 
 }

@@ -82,6 +82,12 @@ if( localStorage.getItem("enableAMP") != null) {
 	localStorage.setItem("enableAMP", "not-checked");
 }
 
+if( localStorage.getItem("enableTracked") != null) {
+	var enableTracked = localStorage.getItem("enableTracked");
+} else {
+	localStorage.setItem("enableTracked", "not-checked");
+}
+
 
 if(	localStorage.getItem("highlightList") != null ) {
 	var highlightList = JSON.parse(localStorage.getItem("highlightList"));

@@ -3,3 +3,7 @@
 	background-image: linear-gradient(#6b36c4, rgba(90, 178, 46, 0)) !important;
 	box-shadow: 0 0 0 1px #522abe, 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 2px 2px rgba(0, 0, 0, 0.25) !important;
 }
+
+.icon {
+	cursor: pointer;
+}

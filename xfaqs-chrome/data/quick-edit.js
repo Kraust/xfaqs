@@ -1,5 +1,4 @@
 
-
 if(typeof(Storage)!=="undefined") {
 	var enableQuickEdit = localStorage.getItem("enableQuickEdit");
 	
@@ -112,7 +111,7 @@ function showEditWindow(message) {
     ,	$editWindow = createPopup("<div class='head'><h2 class='title'>Edit your post</h2></div>")
     ,   $message = $("<div><textarea rows ='" + Math.floor($(window).height() / 45) + "' cols='80' maxlength='4096' name='messagetext'>" + message.html() + "</textarea></div>") //Height of textbox based roughly off height of screen, nothing exact but should ensure all the buttons are visible
     ,	$send = $("<button class='btn btn_primary' style='margin: 5px;'>Send</button>").click(function() {makeEdit($message.find("textarea").val(), boardID, topicID, messageID);})
-    ,   $cancel = $("<button class='btn' style='margin: 5px;'>Cancel</button>").click(function() {replaceButtons(); $editWindow.remove(); msgArea = document.getElementsByName('messagetext')[0];})
+    ,   $cancel = $("<button class='btn' style='margin: 5px;'>Cancel</button>").click(function() {replaceButtons(); $editWindow.remove(); windows.msgArea = document.getElementsByName('messagetext')[0];})
     ,	$buttons = $(".tagbuttons");
     
     if (!$buttons.length) //Either gameweasel or gamefox has replaced the html buttons with their own, so fetch those instead
@@ -121,7 +120,7 @@ function showEditWindow(message) {
     var $buttonHolder = $buttons.prev();
     replaceButtons = function() {$buttonHolder.after($buttons);}; //Fills in the placeholder to replace the desired buttons, called either on cancelling the edit or when you edit another post
     $editWindow.append($buttons).append($message).append($send).append($cancel);
-    msgArea = document.getElementsByName('messagetext')[0];
+    windows.msgArea = document.getElementsByName('messagetext')[0];
 
 }
 

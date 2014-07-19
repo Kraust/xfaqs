@@ -17,7 +17,7 @@ if(enableAMP == "checked") {
 			url: ampURL,
 		}).done(function(response) {
 			var amp = $(response).find("#content > div > div > div > table > tbody:nth-child(3) > tr:nth-child(8) > td:nth-child(2)").text();
-			$(".paginate.user > li ").eq(0).after("<li><a href='" + ampURL + "'>" + amp + "amp</a></li>");
+			$(".paginate.user > li ").eq(0).after("<li><a href='http://www.gamefaqs.com/boards/myposts.php?'>" + amp + "AMP</a></li>");
 		});
 
 	}

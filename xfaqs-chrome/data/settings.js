@@ -1,3 +1,4 @@
+var importSigList = "";
 
 function ignoreCallback(i) {
 	return function() {
@@ -94,7 +95,7 @@ function sigDeleteCallback(i) {
 	}
 }
 
-var sigBody = "<p>1 line break and 160 characters allowed. Just like with regular sigs</p>";
+var sigBody = "<p>1 line break and 160 characters allowed. Just like with regular sigs <span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span></p>";
 var sigNumber = 0;
 
 for( sigNumber; sigNumber < sigList.signatures.length; sigNumber++) {
@@ -133,19 +134,22 @@ for( groupNumber; groupNumber < highlightList.groups.length; groupNumber++) {
 	highlightBody +=	"<table id='table-" + (groupNumber + 1) + "'>" +
 							"<tr><th colspan='2'>Highlight Group " + (groupNumber + 1) + " <input type='submit' class='btn' id='highlightBtn-" + (groupNumber + 1) + "' style='float:right; margin-left:10px;' value='Update'><input type='submit' class='btn' id='deleteBtn-" + (groupNumber + 1) + "' style='float:right' value='Delete'></th></tr>" +
 							"<tr><td>Name</td><td><input id='groupName-" + (groupNumber + 1) + "' style='width:100%' value=\"" + highlightList.groups[groupNumber].groupName + "\"></td></tr>" +
-							"<tr><td>Color</td><td><input type='color' id='color-" + (groupNumber + 1) + "' value=\"" + highlightList.groups[groupNumber].color + "\"></td></tr>" +
+							"<tr><td>Color</td><td><input id='color-" + (groupNumber + 1) + "' value=\"" + highlightList.groups[groupNumber].color + "\"></td></tr>" +
 							"<tr><td>Users</td><td><input id='userNames-" + (groupNumber + 1) + "' style='width:100%' value=\"" + highlightList.groups[groupNumber].userNames + "\"></td></tr>" +
 						"</table>";
+						
 
 }
 
 highlightBody +=	"<table id='table-'" + (groupNumber + 1) + ">" +
 						"<tr><th colspan='2'> New Highlight Group <input type='submit' class='btn' id='highlightBtn-" + (groupNumber + 1) + "' style='float:right' value='Add'></th></tr>" +
 						"<tr><td>Name</td><td><input id='groupName-" + (groupNumber + 1) + "' style='width:100%' value=\"" + "" + "\"></td></tr>" +
-						"<tr><td>Color</td><td><input type='color' id='color-" + (groupNumber + 1) + "' value=\"" + "" + "\"></td></tr>" +
+						"<tr><td>Color</td><td><input id='color-" + (groupNumber + 1) + "' ></td></tr>" +
 						"<tr><td>Users</td><td><input id='userNames-" + (groupNumber + 1) + "' style='width:100%' value=\"" + "" + "\"></td></tr>" +
 					"</table>";
-						
+
+
+					
 						
 $(".masthead_user").prepend("<a href='/boards/user.php?settings=1'>xFAQs Settings <i class='icon icon-cog'></i></a> ");
 
@@ -196,6 +200,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 							   "<tr><td>Board Selector (not implemented)</td><td><select id='enableBoardSelector'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Rotating Signatures</td><td><select id='enableRotatingSigs'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>AMP in Board Navigation</td><td><select id='enableAMP'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Tracked Topics in Board Navigation</td><td><select id='enableTracked'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><th colspan='2'>Text to Image</th></tr>" +
 							   "<tr><td>Text to Image</td><td><select id='enableTTI'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>TTI maximum height</td><td><input id='maxHeight' value=''>px</td>" +
@@ -239,9 +244,23 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 
 			$("#deleteBtn-" + (i + 1)).button();
 			$("#deleteBtn-" + (i + 1)).click(deleteCallback(i + 1));
+			
+			$("#color-" + (i + 1)).spectrum({
+				color: highlightList.groups[i].color,
+				preferredFormat: "hex",
+				showInput: true,
+				allowEmpty:true
+			});
 
 		
 		}
+		
+		$("#color-" + (groupNumber + 1)).spectrum({
+			preferredFormat: "hex",
+			showInput: true,
+			allowEmpty:true
+		});
+
 		
 		for(var i = 0; i < ignoreNumber; i++) {				
 			$("#ignore-" + i).click(ignoreCallback(i));		
@@ -309,6 +328,47 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		});
 
 		
+		$("#exportSigs").click(function() {
+			var oMyBlob = new Blob([localStorage.sigList], {type : 'application/octet-stream'});
+			var url = URL.createObjectURL(oMyBlob);
+			
+			window.open(url, '_blank');
+		});
+		
+		
+		// This is off of SO: http://stackoverflow.com/questions/11046919/how-do-i-read-a-text-file-on-my-local-disk-into-a-variable-in-javascript
+		function handleFileSelect(evt) {
+			var files = evt.target.files; // FileList object
+
+			// Loop through the FileList
+			for (var i = 0, f; f = files[i]; i++) {
+
+			var reader = new FileReader();
+
+			// Closure to capture the file information.
+			reader.onload = (function(theFile) {
+				return function(e) {
+					importSigList = e.target.result;
+					$("#importSigs").removeAttr("disabled");
+				};
+			})(f);
+
+			// Read in the file
+			//reader.readAsDataText(f,UTF-8);
+			//reader.readAsDataURL(f);
+
+			reader.readAsText(f);
+			}
+		}
+		document.getElementById('importSigFiles').addEventListener('change', handleFileSelect, false);
+		
+		// This is off of SO
+		
+		$("#importSigs").click(function() {
+			localStorage.setItem("sigList", importSigList);
+			document.location = "/boards/user.php?settings=1#tabs-5";
+			location.reload(true);
+		});
 		
 		// sets options.		
 		$("#enableWebm").val(enableWebm);
@@ -324,6 +384,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$("#maxHeight").val(maxHeight);
 		$("#enableRotatingSigs").val(enableRotatingSigs);
 		$("#enableAMP").val(enableAMP);
+		$("#enableTracked").val(enableTracked);
 
 
 		// Updates General Settings	
@@ -345,10 +406,10 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			localStorage.setItem("maxHeight", $("#maxHeight").val());
 			localStorage.setItem("enableRotatingSigs", $("#enableRotatingSigs").val());
 			localStorage.setItem("enableAMP", $("#enableAMP").val());
+			localStorage.setItem("enableTracked", $("#enableTracked").val());
 			document.location = "/boards/user.php?settings=1#tabs-1";
 			location.reload(true);
 		});
-		
 		
 
 		
@@ -426,5 +487,6 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 	$("#av_no").click( function() {
 		localStorage.setItem("avatar", "no");
 	});
+	
 
 }

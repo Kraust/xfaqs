@@ -27,10 +27,6 @@ if (enableCode === "checked") {
 
 if(typeof(Storage)!=="undefined") {
 	var enableHighlight = localStorage.getItem("enableHighlight");
-	var tcColor = localStorage.getItem("tcColor");
-	var adminColor = localStorage.getItem("adminColor");
-	var modColor = localStorage.getItem("modColor");
-	var vipColor = localStorage.getItem("vipColor");
 	
 } else {
 	var enableHighlight;
@@ -44,44 +40,15 @@ if (enableHighlight === "checked") {
 	var topicCount = $(".tauthor").length;
 
 	for( var i = 0; i < msgCount; i++) {
-
-		if($("span.author_data:nth-child(1)").eq(i).text() === "#1") {
-			$("td.author").eq(i).css("background-color", tcColor);	
-			$("td.msg").eq(i).css("background-color", tcColor);	
-		}				
-
-		
-		if($("span.author_data:nth-child(3)").eq(i).text() === "(Topic Creator)") {
-			$("td.author").eq(i).css("background-color", tcColor);	
-			$("td.msg").eq(i).css("background-color", tcColor);	
-		}
-		
-		if($("span.author_data:nth-child(3)").eq(i).text() === "(VIP)") {
-			$("td.author").eq(i).css("background-color", vipColor);	
-			$("td.msg").eq(i).css("background-color", vipColor);	
-		}
-		
-		if($("span.author_data:nth-child(3)").eq(i).text() === "(Moderator)") {
-			$("td.author").eq(i).css("background-color", modColor);	
-			$("td.msg").eq(i).css("background-color", modColor);	
-		}
-		
-		if($("span.author_data:nth-child(3)").eq(i).text() === "(Admin)") {
-			$("td.author").eq(i).css("background-color", adminColor);	
-			$("td.msg").eq(i).css("background-color", adminColor);	
-		}
-		
 		for( var j = 0; j < highlightList.groups.length; j++) {
 			for(var k = 0; k < highlightList.groups[j].userNames.length; k++) {
 				if( highlightList.groups[j].userNames[k] === $(".name").eq(i).text()) {
 					$("span.author_data:nth-child(2)").eq(i).after("<span class='author_data'>" + highlightList.groups[j].groupName + "</span>");	
 					$("td.author").eq(i).css("background-color", highlightList.groups[j].color);	
 					$("td.msg").eq(i).css("background-color", highlightList.groups[j].color);	
-				}
-				
+					}
 			}
 		}
-
 	}
 	
 	for( var i = 1; i < topicCount; i++) {
@@ -89,7 +56,7 @@ if (enableHighlight === "checked") {
 			for(var k = 0; k < highlightList.groups[j].userNames.length; k++) {
 				if( highlightList.groups[j].userNames[k] === $(".tauthor").eq(i).text()) {
 					$(".topics").eq(i).css("background-color", highlightList.groups[j].color);	
-				}				
+					}
 			}
 		}
 	}

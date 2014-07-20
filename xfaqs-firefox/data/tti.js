@@ -15,7 +15,7 @@ if(typeof(Storage)!=="undefined") {
 
 
 if (enableTTI === "type-1") {
-	/*$('td.msg').each(function() {
+	$('td.msg').each(function() {
 			var text = $(this).html();
 			var regex = /http:\/\/[^"]*\.png|https:\/\/[^"]*\.png|http:\/\/[^"]*\.jpg|https:\/\/[^"]*\.jpg|http:\/\/[^"]*\.gif|https:\/\/[^"]*\.gif/g;
 			var	matches = regex.exec(text);				
@@ -43,7 +43,7 @@ if (enableTTI === "type-1") {
 			
 			
 			
-	});*/
+	});
 }
 
 if (enableTTI === "type-2") {

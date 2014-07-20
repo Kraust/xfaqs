@@ -4,12 +4,16 @@ $(function() {
 
 
 var msgCount = $("td.msg").length;
-var donators = [ "HellHole_", "helly" ];
+var donators = [ "helIy", "kirbymuncher" ];
 var contributors = [];
 
 for( var i = 0; i < msgCount; i++) {
 	if($(".name").eq(i).text() == "Judgmenl") {
 		$(".name").eq(i).after(" <i class='icon icon-ok-sign' title='xFAQs Creator'></i></a>");
+	}
+	
+	if($(".name").eq(i).text() == "HellHole_") {
+		$(".name").eq(i).after(" <i class='icon icon-ok-sign' title='xFAQs Chrome Maintainer + Donator'></i></a>");
 	}
 	
 	for( var j = 0; j < donators.length; j++) {

@@ -1,27 +1,3 @@
-if( localStorage.getItem("tcColor") != null) {
-	var tcColor = localStorage.getItem("tcColor");
-} else {
-	localStorage.setItem("tcColor", "");
-}
-
-if( localStorage.getItem("adminColor") != null) {
-	var adminColor = localStorage.getItem("adminColor");
-} else {
-	localStorage.setItem("adminColor", "");
-}
-
-if( localStorage.getItem("modColor") != null) {
-	var modColor = localStorage.getItem("modColor");
-} else {
-	localStorage.setItem("modColor", "");
-}
-
-if( localStorage.getItem("vipColor") != null) {
-	var vipColor = localStorage.getItem("vipColor");
-} else {
-	localStorage.setItem("vipColor", "");
-}
-
 var importSigList = "";
 
 function ignoreCallback(i) {
@@ -150,16 +126,7 @@ for( ignoreNumber; ignoreNumber < ignoreList.users.length; ignoreNumber++) {
 
 ignoreBody += "</table>";
 
-
-var highlightBody = "<p>Note: No spaces between user names - just commas.</p>" +
-					"<table>" +
-					"<tr><th>Special Highlights</th><th><input style='float:right' type='submit' id='updateHighlightSpecial' class='btn' value='Update Special Highlights'></th></tr>" +
-					"<tr><td>Highlight Topic Creator</td><td><input id='color-tc' value=\"" + tcColor + "\"></td></tr>" +
-					"<tr><td>Highlight Admins</td><td><input id='color-admin' value=\"" + adminColor + "\"></td></tr>" +
-					"<tr><td>Highlight Mods</td><td><input id='color-mod' value=\"" + modColor + "\"></td></tr>" +										
-					"<tr><td>Highlight VIPs</td><td><input id='color-vip' value=\"" + vipColor + "\"></td></tr>" +										
-					"</table>";
-					
+var highlightBody = "<p>Note: No spaces between user names - just commas.</p>";
 var groupNumber = 0;
 
 for( groupNumber; groupNumber < highlightList.groups.length; groupNumber++) {
@@ -268,7 +235,8 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$(function() {
 			$("#xfaqs-tabs").tabs();
 		});
-				
+
+		
 		for(var i = 0; i < groupNumber; i++) {
 				
 			$("#highlightBtn-" + (i + 1)).button();
@@ -288,34 +256,6 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		}
 		
 		$("#color-" + (groupNumber + 1)).spectrum({
-			preferredFormat: "hex",
-			showInput: true,
-			allowEmpty:true
-		});
-		
-		$("#color-tc").spectrum({
-			color: tcColor,
-			preferredFormat: "hex",
-			showInput: true,
-			allowEmpty:true
-		});
-		
-		$("#color-admin").spectrum({
-			color: adminColor,
-			preferredFormat: "hex",
-			showInput: true,
-			allowEmpty:true
-		});
-		
-		$("#color-mod").spectrum({
-			color: modColor,
-			preferredFormat: "hex",
-			showInput: true,
-			allowEmpty:true
-		});
-		
-		$("#color-vip").spectrum({
-			color: vipColor,
 			preferredFormat: "hex",
 			showInput: true,
 			allowEmpty:true
@@ -445,10 +385,6 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$("#enableRotatingSigs").val(enableRotatingSigs);
 		$("#enableAMP").val(enableAMP);
 		$("#enableTracked").val(enableTracked);
-		$("#color-tc").val(enableTracked);
-		$("#color-admin").val(enableTracked);
-		$("#color-mod").val(enableTracked);
-		$("#color-vip").val(enableTracked);
 
 
 		// Updates General Settings	
@@ -471,28 +407,12 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			localStorage.setItem("enableRotatingSigs", $("#enableRotatingSigs").val());
 			localStorage.setItem("enableAMP", $("#enableAMP").val());
 			localStorage.setItem("enableTracked", $("#enableTracked").val());
-			localStorage.setItem("tcColor", $("#color-tc").val());
-			localStorage.setItem("adminColor", $("#color-admin").val());
-			localStorage.setItem("modColor", $("#color-mod").val());
-			localStorage.setItem("vipColor", $("#color-vip").val());
 			document.location = "/boards/user.php?settings=1#tabs-1";
 			location.reload(true);
 		});
 		
-		$("#updateHighlightSpecial").click(function(event) {
-			localStorage.setItem("tcColor", $("#color-tc").val());
-			localStorage.setItem("adminColor", $("#color-admin").val());
-			localStorage.setItem("modColor", $("#color-mod").val());
-			localStorage.setItem("vipColor", $("#color-vip").val());
-			document.location = "/boards/user.php?settings=1#tabs-3";
-			location.reload(true);
-		});
 
-		$("#color-tc").val(tcColor);
-		$("#color-admin").val(adminColor);
-		$("#color-mod").val(modColor);
-		$("#color-vip").val(vipColor);
-
+		
 	}
 	
 	

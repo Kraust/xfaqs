@@ -1,0 +1,2 @@
+$('head').append('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/spectrum/1.3.0/css/spectrum.css" type="text/css" />');
+$('head').append('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/default.min.css" type="text/css" />');

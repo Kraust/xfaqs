@@ -4,7 +4,7 @@
 	"name": "xFAQs",
 	"author": "Judgmenl",
 	"description": "Improvements for GameFAQs",
-	"version": "0.5",
+	"version": "0.7",
 	"homepage_url": "http://weblab.cs.uml.edu/~rdupuis/xfaqs/",
 
 	"icons": { "16": "data/img/icon.png", "48": "data/img/icon.png", "128": "data/img/icon.png" },
@@ -21,7 +21,6 @@
 						"data/filesaver.js",						
 						"data/storage.js", 
 						"data/settings.js", 
-						"data/gamefaqs-avatars.js", 
 						"data/modules.js", 
 						"data/quick-topic.js", 
 						"data/rotating-sigs.js", 
@@ -36,6 +35,16 @@
 						"data/badges.js"],
 				"css": ["data/xfaqs-main.css", "data/default.min.css", "data/spectrum.css"],
 				"run_at": "document_end"
-			}			
-		]  
+			},
+			
+			{
+				"matches": ["http://*.gamefaqs.com/*"],
+				"js": ["data/gamefaqs-avatars.js"],
+				"run_at": "document_idle"
+			}
+
+			
+			
+		]
+		
 }

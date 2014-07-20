@@ -4,7 +4,7 @@ $(function() {
 
 
 var msgCount = $("td.msg").length;
-var donators = [ "helIy", "kirbymuncher" ];
+var donators = [ "helly" ];
 var contributors = [];
 
 for( var i = 0; i < msgCount; i++) {

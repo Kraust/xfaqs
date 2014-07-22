@@ -16,6 +16,12 @@ if(typeof(Storage)!=="undefined") {
 
 }
 
+// boards fix 7/22/14
+$(".span4").hide();
+$(".span8").css("width", "100%");
+
+
+
 // <code> tag module.
 if (enableCode === "checked") {
 	$("code").wrap("<pre></pre>");

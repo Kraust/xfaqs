@@ -1,2 +1,3 @@
-xFAQs source code for both the Chrome and Firefox branches.
-It may be outdated, as this is only an external repository and won't be updated frequently.
+xFAQs Source Code for Firefox, Chrome and Maxthon.
+
+Also contains old chrome and maxthon builds as they need to be packaged before submitting.

@@ -184,7 +184,7 @@ highlightBody +=	"<table id='table-'" + (groupNumber + 1) + ">" +
 
 					
 						
-$(".masthead_user").prepend("<a href='/boards/user.php?settings=1'>xFAQs Settings <i class='icon icon-cog'></i></a> ");
+$(".masthead_user").prepend("<a href='/boards/565885-blood-money/'>xFAQs Help</a> <a href='/boards/user.php?settings=1'>xFAQs Settings <i class='icon icon-cog'></i></a> ");
 
 
 if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20')) == "1") && (location.pathname == "/boards/user.php")) {

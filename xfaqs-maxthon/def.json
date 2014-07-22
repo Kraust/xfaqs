@@ -1,6 +1,6 @@
 ﻿[
 	{	"type": "extension",
-		"version":"0.2",
+		"version":"0.3",
 		"frameworkVersion": "1.0.6",
         "guid": "{428d0e49-3a62-4b6b-b53b-5fdfeb5a14c6}",
 		"author" : {	"name": "Judgmenl",

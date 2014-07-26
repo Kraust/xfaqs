@@ -119,7 +119,13 @@ function sigDeleteCallback(i) {
 	}
 }
 
-var sigBody = "<p>1 line break and 160 characters allowed. Just like with regular sigs <span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span></p>";
+var aboutBody =
+				"<p>xFAQs - GameFAQs Improvements created by <a href='http://www.gamefaqs.com/users/Judgmenl/boards'>Judgmenl</a>.</p>" +
+				"<h3>Credits</h3>" +
+				"<p>Judgmenl (Developer)<br>HellHole_ (Hosting the Chrome version)<br>kirbymuncher (Quick Edit source code)</p>" +
+				"<p>The xFAQs site can be located at <a href='http://xfaqs.nostlagiasky.pw/'>nostlagiasky</a>";
+
+var sigBody = "<span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span><p>1 line break and 160 characters allowed. Just like with regular sigs.<br> If you want a signature to apply to all boards or accounts leave the field blank.<br>Multiple boards and accounts are separated by commas.</p>";
 var sigNumber = 0;
 
 for( sigNumber; sigNumber < sigList.signatures.length; sigNumber++) {
@@ -184,7 +190,8 @@ highlightBody +=	"<table id='table-'" + (groupNumber + 1) + ">" +
 
 					
 						
-$(".masthead_user").prepend("<a href='/boards/565885-blood-money/'>xFAQs Help</a> <a href='/boards/user.php?settings=1'>xFAQs Settings <i class='icon icon-cog'></i></a> ");
+//$(".masthead_user").prepend("<a href='/boards/565885-blood-money/'>xFAQs Help</a> <a href='/boards/user.php?settings=1'>xFAQs Settings <i class='icon icon-cog'></i></a> ");
+$(".masthead_user").prepend("<span class='masthead_mygames_drop'><a href='/boards/user.php?settings=1'>xFAQs Settings <i class='icon icon-cog'></i></a><ul class='masthead_mygames_subnav' style='width:200px;left:-1px;'><li class='masthead_mygames_subnav_item'><a href='/boards/565885-blood-money/'>xFAQs Help</a></li></ul></span> ");
 
 
 if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20')) == "1") && (location.pathname == "/boards/user.php")) {
@@ -218,24 +225,26 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
   							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-3'>User Highlighting</a></li>" +
   							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-4'>Ignore List+</a></li>" +
   							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-5'>Rotating Signatures</a></li>" +
+  							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-6'>About</a></li>" +
 							   "</ul>" +
 							   
 							   "<div id='tabs-1' style='padding-top:20px'>" +
 							   "<table class='contrib'>" +
 							   "<tr><th colspan='2'>General Settings</th></tr>" +
-							   "<tr><td>Embedded WebM Videos</td><td><select id='enableWebm'><option value='type-1'>Type 1</option><option value='type-2'>Type 2</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><td>Improved < code > tags</td><td><select id='enableCode'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Improved code tags</td><td><select id='enableCode'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Quick Edit</td><td><select id='enableQuickEdit'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Quick Topic</td><td><select id='enableQuickTopic'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><td>Enable Avatars</td><td><select id='enableAvatars'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>GameFAQs Avatars <i class='icon icon-question-sign' title='GameFAQs Avatars is a third party system that gives users a custom avatar of their choice.'></i></td><td><select id='enableAvatars'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>User Highlighting</td><td><select id='enableHighlight'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><td>Ignore+</td><td><select id='enableIgnore'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><td>Board Selector (not implemented)</td><td><select id='enableBoardSelector'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><td>Rotating Signatures</td><td><select id='enableRotatingSigs'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Ignore+ <i class='icon icon-question-sign' title='Ignore+ provides unlimited ignored users and the ability to ignore Mods/Admins'></i></td><td><select id='enableIgnore'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Rotating Signatures <i class='icon icon-question-sign' title='Signatures are taken randomly from a list of signatures that you provide'></i></td><td><select id='enableRotatingSigs'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>AMP in Board Navigation</td><td><select id='enableAMP'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Tracked Topics in Board Navigation</td><td><select id='enableTracked'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Search Topics at top of Board</td><td><select id='searchTopics'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Message Filtering</td><td><select id='enableFilter'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><th colspan='2'>Text to Image</th></tr>" +
-							   "<tr><td>Text to Image</td><td><select id='enableTTI'><option value='type-1'>Type 1</option><option value='type-2'>Type 2</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Embedded Videos <i class='icon icon-question-sign' title='Supported Formats: WebM, Youtube'></i></td><td><select id='enableWebm'><option value='type-2'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Text to Image <i class='icon icon-question-sign' title='Use Type 1 if you don&#39;t want to toggle to see images. Use Type 2 otherwise.'></i></td><td><select id='enableTTI'><option value='type-1'>Type 1</option><option value='type-2'>Type 2</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>TTI maximum height</td><td><input id='maxHeight' value=''>px</td>" +
 							   "<tr><td>TTI maximum width</td><td><input id='maxWidth' value=''>px</td>" +
 							   "<tr><td colspan='2'><input type='submit' id='updateGeneral' class='btn' value='Update xFAQs Settings'><span style='float:right;'><form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'><input type='hidden' name='cmd' value='_s-xclick'><input type='hidden' name='hosted_button_id' value='XABH3W5N9JNCQ'><input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'><img alt='paypal' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'></form></span></td></tr>" +
@@ -257,12 +266,15 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 										</form></div>" +
 										
 										"<div style='clear:both;padding-top:30px;'>Before uploading an avatar, you must change your Signature to upload:ok (<a href='http://puu.sh/9yTZJ/3acde356e0.png' target='_blank'>Example</a>). \
-											You can do that on <a href='http://www.gamefaqs.com/boards/sigquote.php' target='_blank'>this</a> page. You can change your signature back after the avatar is uploaded.</div>" +
+											You can do that on <a href='http://www.gamefaqs.com/boards/sigquote.php' target='_blank'>this</a> page. You can change your signature back after the avatar is uploaded.<br> \
+											Avatars are loosely moderated and at any time you may see the gallery <a href='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/'>here</a>.<br> \
+											PM Judgmenl with any concerns.</div>" +
 											
 							   "</div>" +
    							   "<div id='tabs-3' style='padding-top:20px'>" + highlightBody + "</div>" +
    							   "<div id='tabs-4' style='padding-top:20px'>" + ignoreBody + "</div>" +
    							   "<div id='tabs-5' style='padding-top:20px'>" + sigBody + "</div>" +
+   							   "<div id='tabs-6' style='padding-top:20px'>" + aboutBody + "</div>" +
 							"</div>");
 						   
 		$(function() {
@@ -449,6 +461,8 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$("#color-admin").val(enableTracked);
 		$("#color-mod").val(enableTracked);
 		$("#color-vip").val(enableTracked);
+		$("#searchTopics").val(searchTopics);
+		$("#enableFilter").val(enableFilter);
 
 
 		// Updates General Settings	
@@ -475,6 +489,8 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			localStorage.setItem("adminColor", $("#color-admin").val());
 			localStorage.setItem("modColor", $("#color-mod").val());
 			localStorage.setItem("vipColor", $("#color-vip").val());
+			localStorage.setItem("searchTopics", $("#searchTopics").val());
+			localStorage.setItem("enableFilter", $("#enableFilter").val());
 			document.location = "/boards/user.php?settings=1#tabs-1";
 			location.reload(true);
 		});

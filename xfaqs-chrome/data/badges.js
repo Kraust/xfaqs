@@ -1,11 +1,13 @@
 $(function() {
-	$(document).tooltip();
+	$(document).tooltip( {
+		position: { my: "left+0 center", at: "right+15 center" }, tooltipClass:'tooltip'
+	});
 });
 
 
 var msgCount = $("td.msg").length;
-var donators = [ "helIy", "kirbymuncher" ];
-var contributors = [];
+var donators = [ "helIy" ];
+var contributors = ["kirbymuncher"];
 
 for( var i = 0; i < msgCount; i++) {
 	if($(".name").eq(i).text() == "Judgmenl") {

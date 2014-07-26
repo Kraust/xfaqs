@@ -5,6 +5,7 @@ if(typeof(Storage)!=="undefined") {
 	var enableQuickEdit = localStorage.getItem("enableQuickEdit");
 	var enableAvatars = localStorage.getItem("enableAvatars");
 	var enableHighlight = localStorage.getItem("enableHighlight");
+	var searchTopics = localStorage.getItem("searchTopics");
 	
 } else {
 	var storage = "left";
@@ -12,17 +13,14 @@ if(typeof(Storage)!=="undefined") {
 	var enableCode;
 	var enableQuickEdit;
 	var enableAvatars;
+	var searchTopics;
 	var enableHighlight;
 
 }
 
-// boards fix 7/22/14
-
-if($(".span4 > .pod_gameinfo").text() != "") {
-	$(".span4").hide();
-	$(".span8").css("width", "100%");
+if(searchTopics == "checked") {
+	$(".board_nav").prepend($(".searchtopics").css("margin", "0"));
 }
-
 
 // <code> tag module.
 if (enableCode === "checked") {

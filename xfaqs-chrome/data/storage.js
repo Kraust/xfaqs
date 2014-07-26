@@ -88,6 +88,19 @@ if( localStorage.getItem("enableTracked") != null) {
 	localStorage.setItem("enableTracked", "not-checked");
 }
 
+if( localStorage.getItem("searchTopics") != null) {
+	var searchTopics = localStorage.getItem("searchTopics");
+} else {
+	localStorage.setItem("searchTopics", "not-checked");
+}
+
+if( localStorage.getItem("enableFilter") != null) {
+	var enableFilter = localStorage.getItem("enableFilter");
+} else {
+	localStorage.setItem("enableFilter", "not-checked");
+}
+
+
 
 if(	localStorage.getItem("highlightList") != null ) {
 	var highlightList = JSON.parse(localStorage.getItem("highlightList"));

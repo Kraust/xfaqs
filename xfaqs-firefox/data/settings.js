@@ -40,6 +40,25 @@ if(	localStorage.getItem("sigList") != null ) {
 
 }
 
+if(	localStorage.getItem("ignoreList") != null ) {
+	var ignoreList = JSON.parse(localStorage.getItem("ignoreList"));
+
+} else {
+ 
+
+	var ignoreList =
+	{ 	
+		"users": [
+				
+		]
+	};
+	
+	localStorage.setItem("ignoreList", JSON.stringify(ignoreList));
+
+
+}
+
+
 var importSigList = "";
 
 function ignoreCallback(i) {

@@ -503,7 +503,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			reader.readAsText(f);
 			}
 		}
-		document.getElementById('importSigFiles').addEventListener('change', handleFileSelect, false);
+		//document.getElementById('importSigFiles').addEventListener('change', handleFileSelect, false);
 		
 		// This is off of SO
 		
@@ -523,7 +523,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$("#enableAvatars").val(enableAvatars);
 		$("#enableHighlight").val(enableHighlight);
 		$("#enableIgnore").val(enableIgnore);
-		$("#enableBoardSelector").val(enableBoardSelector);
+		//$("#enableBoardSelector").val(enableBoardSelector);
 		$("#enableTTI").val(enableTTI);
 		$("#maxWidth").val(maxWidth);
 		$("#maxHeight").val(maxHeight);
@@ -551,7 +551,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			localStorage.setItem("enableAvatars", $("#enableAvatars").val());
 			localStorage.setItem("enableHighlight", $("#enableHighlight").val());
 			localStorage.setItem("enableIgnore", $("#enableIgnore").val());
-			localStorage.setItem("enableBoardSelector", $("#enableBoardSelector").val());
+			//localStorage.setItem("enableBoardSelector", $("#enableBoardSelector").val());
 			localStorage.setItem("enableTTI", $("#enableTTI").val());
 			localStorage.setItem("maxWidth", $("#maxWidth").val());
 			localStorage.setItem("maxHeight", $("#maxHeight").val());

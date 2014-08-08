@@ -197,8 +197,7 @@ var aboutBody =
 				"<p>Judgmenl (Developer)<br>HellHole_ (Hosting the Chrome version)<br>kirbymuncher (Quick Edit source code)</p>" +
 				"<p>The xFAQs site can be located at <a href='http://xfaqs.nostlagiasky.pw/'>nostlagiasky</a>";
 
-//var sigBody = "<span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span><p>1 line break and 160 characters allowed. Just like with regular sigs.<br> If you want a signature to apply to all boards or accounts leave the field blank.<br>Multiple boards and accounts are separated by commas.</p>";
-sigBody = "";
+var sigBody = "<span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span><p>1 line break and 160 characters allowed. Just like with regular sigs.<br> If you want a signature to apply to all boards or accounts leave the field blank.<br>Multiple boards and accounts are separated by commas.</p>";
 
 var sigNumber = 0;
 
@@ -507,7 +506,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			reader.readAsText(f);
 			}
 		}
-		//document.getElementById('importSigFiles').addEventListener('change', handleFileSelect, false);
+		document.getElementById('importSigFiles').addEventListener('change', handleFileSelect, false);
 		
 		// This is off of SO
 		

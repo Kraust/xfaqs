@@ -58,6 +58,37 @@ if(	localStorage.getItem("ignoreList") != null ) {
 
 }
 
+if(	localStorage.getItem("highlightList") != null ) {
+	var highlightList = JSON.parse(localStorage.getItem("highlightList"));
+
+} else {
+ 
+
+	var highlightList =
+	{ 	
+		"groups": [
+		
+			{
+				"groupName": "xFAQs Creator",
+				"color": "#FFD9D9",
+				"userNames": [ "Judgmenl" ] 
+			},
+			
+			{
+				"groupName": "Creator's Alt",
+				"color": "#FFD9D9",
+				"userNames": [ "_SecretDragoon", "1337_FF_GoD" ] 
+			}
+		
+		]
+	};
+	
+	localStorage.setItem("highlightList", JSON.stringify(highlightList));
+
+
+}
+
+
 
 var importSigList = "";
 

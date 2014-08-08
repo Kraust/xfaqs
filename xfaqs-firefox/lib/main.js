@@ -11,7 +11,7 @@ pageMod.PageMod({
 						data.url("jquery.csv-0.71.min.js"), 
 						data.url("highlight.min.js"), 
 						data.url("spectrum.js"),
-						//data.url("filesaver.js"),						
+						data.url("filesaver.js"),						
 						data.url("storage.js"),
 						data.url("filter.js"),
 						data.url("modules.js"), 						

@@ -470,7 +470,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		});
 
 		
-		/*
+		
 		$("#exportSigs").click(function() {
 			var oMyBlob = new Blob([localStorage.sigList], {type : 'application/octet-stream'});
 			var url = URL.createObjectURL(oMyBlob);
@@ -513,7 +513,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			location.reload(true);
 		});
 		
-		*/
+		
 		
 		// sets options.		
 		$("#enableWebm").val(enableWebm);

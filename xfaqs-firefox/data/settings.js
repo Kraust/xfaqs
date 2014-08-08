@@ -125,7 +125,9 @@ var aboutBody =
 				"<p>Judgmenl (Developer)<br>HellHole_ (Hosting the Chrome version)<br>kirbymuncher (Quick Edit source code)</p>" +
 				"<p>The xFAQs site can be located at <a href='http://xfaqs.nostlagiasky.pw/'>nostlagiasky</a>";
 
-var sigBody = "<span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span><p>1 line break and 160 characters allowed. Just like with regular sigs.<br> If you want a signature to apply to all boards or accounts leave the field blank.<br>Multiple boards and accounts are separated by commas.</p>";
+//var sigBody = "<span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span><p>1 line break and 160 characters allowed. Just like with regular sigs.<br> If you want a signature to apply to all boards or accounts leave the field blank.<br>Multiple boards and accounts are separated by commas.</p>";
+sigBody = "";
+
 var sigNumber = 0;
 
 for( sigNumber; sigNumber < sigList.signatures.length; sigNumber++) {
@@ -242,11 +244,11 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 							   "<tr><td>Tracked Topics in Board Navigation</td><td><select id='enableTracked'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Search Topics at top of Board</td><td><select id='searchTopics'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Message Filtering</td><td><select id='enableFilter'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><th colspan='2'>Text to Image</th></tr>" +
-							   "<tr><td>Embedded Videos <i class='icon icon-question-sign' title='Supported Formats: WebM, Youtube'></i></td><td><select id='enableWebm'><option value='type-2'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><td>Text to Image <i class='icon icon-question-sign' title='Use Type 1 if you don&#39;t want to toggle to see images. Use Type 2 otherwise.'></i></td><td><select id='enableTTI'><option value='type-1'>Type 1</option><option value='type-2'>Type 2</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><td>TTI maximum height</td><td><input id='maxHeight' value=''>px</td>" +
-							   "<tr><td>TTI maximum width</td><td><input id='maxWidth' value=''>px</td>" +
+							   "<tr><th colspan='2'>Replace Links with Media</th></tr>" +
+							   "<tr><td>Embedded Videos <i class='icon icon-question-sign' title='Supported Formats: WebM, Youtube'></i></td><td><select id='enableWebm'><option value='type-2'>Enabled (Toggle)</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Images <i class='icon icon-question-sign' title='Use Thumbnails if you don&#39;t want to toggle to see images. Use Toggle otherwise.'></i></td><td><select id='enableTTI'><option value='type-1'>Thumbnails</option><option value='type-2'>Toggle</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Image thumbnails maximum height</td><td><input id='maxHeight' value=''>px</td>" +
+							   "<tr><td>Image thumbnails maximum width</td><td><input id='maxWidth' value=''>px</td>" +
 							   "<tr><td colspan='2'><input type='submit' id='updateGeneral' class='btn' value='Update xFAQs Settings'><span style='float:right;'><form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'><input type='hidden' name='cmd' value='_s-xclick'><input type='hidden' name='hosted_button_id' value='XABH3W5N9JNCQ'><input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'><img alt='paypal' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'></form></span></td></tr>" +
 							   "</table>" +
 							   "</div>" +
@@ -400,6 +402,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		});
 
 		
+		/*
 		$("#exportSigs").click(function() {
 			var oMyBlob = new Blob([localStorage.sigList], {type : 'application/octet-stream'});
 			var url = URL.createObjectURL(oMyBlob);
@@ -441,6 +444,8 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			document.location = "/boards/user.php?settings=1#tabs-5";
 			location.reload(true);
 		});
+		
+		*/
 		
 		// sets options.		
 		$("#enableWebm").val(enableWebm);

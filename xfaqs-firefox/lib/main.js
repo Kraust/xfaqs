@@ -7,15 +7,14 @@ pageMod.PageMod({
 						data.url("xfaqs-main.css"),
 						data.url("spectrum.css")],
 	contentScriptFile: [data.url("jquery-2.1.1.min.js"), 
-						data.url("jquery-ui.min.js"), 
+						data.url("jquery-ui-1.11.0/jquery-ui.min.js"), 
 						data.url("jquery.csv-0.71.min.js"), 
 						data.url("highlight.min.js"), 
 						data.url("spectrum.js"),
-						data.url("filesaver.js"),						
+						//data.url("filesaver.js"),						
 						data.url("storage.js"),
 						data.url("filter.js"),
 						data.url("modules.js"), 						
-						data.url("tti.js"),
 						data.url("settings.js"), 
 						data.url("gamefaqs-avatars.js"), 
 						data.url("quick-topic.js"), 
@@ -28,7 +27,8 @@ pageMod.PageMod({
 						data.url("board-selector.js"),
 						data.url("export-import.js"),
 						data.url("hotkeys.js"),
-						data.url("badges.js")],
+						data.url("badges.js"),
+						data.url("tti.js")],
 
 	contentScriptWhen: "ready"
 });

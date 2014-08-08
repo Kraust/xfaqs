@@ -161,7 +161,11 @@ if(	localStorage.getItem("sigList") != null ) {
 	var sigList =
 	{ 	
 		"signatures": [
-				
+				{
+					"boards": [""],
+					"accounts": [""],
+					"signature": "powered by xfaqs"
+				}
 		]
 	};
 	

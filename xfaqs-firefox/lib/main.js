@@ -9,7 +9,6 @@ pageMod.PageMod({
 	contentScriptFile: [data.url("jquery-2.1.1.min.js"), 
 						data.url("jquery-ui-1.11.0/jquery-ui.min.js"), 
 						data.url("jquery.csv-0.71.min.js"), 
-						data.url("highlight.min.js"), 
 						data.url("spectrum.js"),
 						data.url("filesaver.js"),						
 						data.url("storage.js"),

@@ -19,7 +19,25 @@ if( localStorage.getItem("modColor") != null) {
 if( localStorage.getItem("vipColor") != null) {
 	var vipColor = localStorage.getItem("vipColor");
 } else {
-	localStorage.setItem("vipColor", "");
+	localStorage.setItem("vipColor", );
+}
+
+if(	localStorage.getItem("sigList") != null ) {
+	var sigList = JSON.parse(localStorage.getItem("sigList"));
+
+} else {
+ 
+
+	var sigList =
+	{ 	
+		"signatures": [
+				
+		]
+	};
+	
+	localStorage.setItem("sigList", JSON.stringify(sigList));
+
+
 }
 
 var importSigList = "";

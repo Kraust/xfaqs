@@ -135,8 +135,11 @@ function makeEdit(message, board, topic, ID) {
 var user = $(".welcome").text().slice(0, -1);
 var msgCount = $("td.msg").length;
 var reg = /\/(\d+)/g;
-var boardID = reg.exec(location.href)[1];
-var topicID = reg.exec(location.href)[1];	
+
+if(reg.exec(location.href)[1]) {
+	var boardID = reg.exec(location.href)[1];
+	var topicID = reg.exec(location.href)[1];	
+}
 
 function editCallback(i, messageID) {
 	return function() {

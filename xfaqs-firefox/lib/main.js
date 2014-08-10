@@ -10,7 +10,6 @@ pageMod.PageMod({
 						data.url("jquery-ui-1.11.0/jquery-ui.min.js"), 
 						data.url("jquery.csv-0.71.min.js"), 
 						data.url("spectrum.js"),
-						data.url("filesaver.js"),						
 						data.url("storage.js"),
 						data.url("filter.js"),
 						data.url("modules.js"), 						

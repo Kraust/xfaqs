@@ -473,6 +473,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		});
 
 		
+		/*
 		
 		$("#exportSigs").click(function() {
 			var oMyBlob = new Blob([localStorage.sigList], {type : 'application/octet-stream'});
@@ -516,7 +517,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			location.reload(true);
 		});
 		
-		
+		*/
 		
 		// sets options.		
 		$("#enableWebm").val(enableWebm);

@@ -3,8 +3,7 @@ var pageMod = require("sdk/page-mod");
 
 pageMod.PageMod({
 	include: "*.gamefaqs.com",
-	contentStyleFile:  [data.url("default.min.css"), 
-						data.url("xfaqs-main.css"),
+	contentStyleFile:  [data.url("xfaqs-main.css"),
 						data.url("spectrum.css")],
 	contentScriptFile: [data.url("jquery-2.1.1.min.js"), 
 						data.url("jquery-ui-1.11.0/jquery-ui.min.js"), 
@@ -22,8 +21,6 @@ pageMod.PageMod({
 						data.url("youtube.js"),
 						data.url("amp.js"),
 						data.url("tracked-topics.js"),
-						data.url("board-selector.js"),
-						data.url("export-import.js"),
 						data.url("hotkeys.js"),
 						data.url("badges.js"),
 						data.url("tti.js")],

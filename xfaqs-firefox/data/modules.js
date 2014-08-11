@@ -96,6 +96,8 @@ if(searchTopics == "checked") {
 
 
 // Highlighting
+// I should really put this in its own file
+// Currently only works with V13 and V12.
 
 if(typeof(Storage)!=="undefined") {
 	var enableHighlight = localStorage.getItem("enableHighlight");

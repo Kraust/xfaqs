@@ -34,7 +34,7 @@ if(enableQuickTopic == "checked") {
 													<div class="details"> \
 														<p><b>Topic Title:</b> \
 														<input id="quickTopicTitle" type="text" onkeyup="sub_cc(this.form.topictitle)" value="" name="topictitle" maxlength="80" size="70"><br> \
-													<p><textarea id="quickTopicPost" onkeyup="msg_cc(this.form.messagetext)" name="messagetext" rows="20" cols="100" style="width: 100%;"></textarea></p> \
+													<p>' + formatter + '<textarea id="quickTopicPost" onkeyup="msg_cc(this.form.messagetext)" name="messagetext" rows="20" cols="100" style="width: 100%;"></textarea></p> \
 													<div class="head"><h2 class="title" style="font-family: &quot;nimbus-sans&quot;,&quot;Helvetica Neue&quot;,&quot;HelveticaNeue&quot;,Arial,sans-serif; font-weight: 700; letter-spacing: -1px; text-transform: none;">Custom Signature</h2></div><textarea cols="100" rows="2" name="custom_sig" style="width: 100%;"></textarea> \
 													<input style="margin-top:10px;" type="submit" id="postMsg" name="post" value="Post without Preview" class="btn btn_primary"> <input style="margin-top:10px;" type="reset" onclick="return confirm(\'Are you sure? This will clear your entire post so far.\')" class="btn" name="reset" value="Reset"> <input style="margin-top:10px;" type="button" id="qt-close" class="btn" name="close" value="Close">\
 												</div> \
@@ -43,6 +43,15 @@ if(enableQuickTopic == "checked") {
 									</form></div>';
 									
 				$("body").append(topicForm);
+				
+				$('[name="b"]').click(function() {txtTagEdit('b');});
+				$('[name="i"]').click(function() {txtTagEdit('i');});
+				$('[name="spoiler"]').click(function() {txtTagEdit('spoiler');});
+				$('[name="cite"]').click(function() {txtTagEdit('cite');});
+				$('[name="quote"]').click(function() {txtTagEdit('quote');});
+				$('[name="code"]').click(function() {txtTagEdit('code');});
+
+				
 				$("#qt-close").click(function() {
 					$("#quickTopic").remove();
 				});

@@ -1,3 +1,4 @@
+/*var win = window.content.document.defaultView.wrappedJSObject;
 
 
 if(typeof(Storage)!=="undefined") {
@@ -112,7 +113,7 @@ function showEditWindow(message) {
     ,	$editWindow = createPopup("<div class='head'><h2 class='title'>Edit your post</h2></div>")
     ,   $message = $("<div><textarea rows ='" + Math.floor($(window).height() / 45) + "' cols='80' maxlength='4096' name='messagetext'>" + message.html() + "</textarea></div>") //Height of textbox based roughly off height of screen, nothing exact but should ensure all the buttons are visible
     ,	$send = $("<button class='btn btn_primary' style='margin: 5px;'>Send</button>").click(function() {makeEdit($message.find("textarea").val(), boardID, topicID, messageID);})
-    ,   $cancel = $("<button class='btn' style='margin: 5px;'>Cancel</button>").click(function() {replaceButtons(); $editWindow.remove(); window.msgArea = document.getElementsByName('messagetext')[0];})
+    ,   $cancel = $("<button class='btn' style='margin: 5px;'>Cancel</button>").click(function() {replaceButtons(); $editWindow.remove(); win.msgArea = document.getElementsByName('messagetext')[0];})
     ,	$buttons = $(".tagbuttons");
     
     if (!$buttons.length) //Either gameweasel or gamefox has replaced the html buttons with their own, so fetch those instead
@@ -121,11 +122,77 @@ function showEditWindow(message) {
     var $buttonHolder = $buttons.prev();
     replaceButtons = function() {$buttonHolder.after($buttons);}; //Fills in the placeholder to replace the desired buttons, called either on cancelling the edit or when you edit another post
     $editWindow.append($buttons).append($message).append($send).append($cancel);
-    window.msgArea = document.getElementsByName('messagetext')[0];
+    win.msgArea = document.getElementsByName('messagetext')[0];
 
 }
 
 function makeEdit(message, board, topic, ID) {
     var url = "/boards/post.php?board=" + board + "&topic=" + topic + "&message=" + ID;
     $.post(url, {key: key, messagetext: message, post: 'Post without Preview', custom_sig: $("textarea[name='custom_sig']").val()}).done(function() {location.reload();}).fail(function() {$("#popup-window textarea").val("Could not edit the post.");});
+} */
+
+
+var user = $(".welcome").text().slice(0, -1);
+var msgCount = $("td.msg").length;
+var reg = /\/(\d+)/g;
+var boardID = reg.exec(location.href)[1];
+var topicID = reg.exec(location.href)[1];	
+
+function editCallback(i, messageID) {
+	return function() {
+		var postUrl = "/boards/post.php?board=" + boardID + "&topic=" + topicID + "&message=" + messageID;
+		var msg = $('td.msg').eq(i).html();
+
+		$.ajax({
+			type: "POST",
+			url: postUrl,
+			async: false
+		}).done(function(response) {
+			var content = $(response).find('.body').eq(0).html();
+			var textarea = $(response).find('.body textarea').eq(0);
+			$(textarea).css("width", "100%");
+			var key = response.match(/key" value="([^"]*)"/)[1];
+			var sig = $("[name=custom_sig]").val();
+			
+			//$('td.msg').eq(i).html(content);
+			
+			$('td.msg').eq(i).html(textarea);
+			$('td.msg').eq(i).prepend(formatter);
+			$('td.msg').eq(i).append("<div style='display:block'><button class='btn btn_primary' id='editBtn-" + i + "'>Edit</button> <button class='btn' id='cancelBtn-" + i + "'>Cancel</button></div>");
+			
+			$('[name="b"]').click(function() {txtTagEdit('b');});
+			$('[name="i"]').click(function() {txtTagEdit('i');});
+			$('[name="spoiler"]').click(function() {txtTagEdit('spoiler');});
+			$('[name="cite"]').click(function() {txtTagEdit('cite');});
+			$('[name="quote"]').click(function() {txtTagEdit('quote');});
+			$('[name="code"]').click(function() {txtTagEdit('code');});
+						
+			$('#editBtn-' + i).click(function() {
+				$.post( postUrl, { key: key, messagetext: $('td.msg textarea').val(), post: "Post without Preview", custom_sig: sig } ).success(function() {
+					location.reload(true);
+				}).error(function() {
+					alert("Unable to edit post. This may be because you've edited your post the maximum amount of times, or your time limit has expired");
+				});
+			});
+			
+			$("#cancelBtn-" + i).click(function() {
+					$('td.msg').eq(i).html(msg);
+			});
+		}).error(function() {
+					alert("Unable to edit post. This may be because you've edited your post the maximum amount of times, or your time limit has expired");
+		});;
+	}
+
 }
+
+for( var i = 0; i < msgCount; i++) {
+	if( user == $(".name").eq(i).text() ) {
+		var messageID = $(".msg_body").eq(i).attr('name');
+		$("a.qq").eq(i).after(" - <a class='edit-" + i + "'>edit</a>");
+	
+		$(".edit-" + i).click(editCallback(i, messageID));
+	}
+}
+
+
+

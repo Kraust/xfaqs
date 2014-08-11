@@ -305,18 +305,19 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 							   "<div id='tabs-1' style='padding-top:20px'>" +
 							   "<table class='contrib'>" +
 							   "<tr><th colspan='2'>General Settings</th></tr>" +
-							   "<tr><td>Improved code tags</td><td><select id='enableCode'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr style='display:none;'><td>Improved code tags</td><td><select id='enableCode'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Quick Edit</td><td><select id='enableQuickEdit'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Quick Topic</td><td><select id='enableQuickTopic'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>GameFAQs Avatars <i class='icon icon-question-sign' title='GameFAQs Avatars is a third party system that gives users a custom avatar of their choice.'></i></td><td><select id='enableAvatars'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><td>User Highlighting</td><td><select id='enableHighlight'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>User Highlighting <i class='icon icon-question-sign' title='Works in V12 and V13 only'></i></td><td><select id='enableHighlight'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Ignore+ <i class='icon icon-question-sign' title='Ignore+ provides unlimited ignored users and the ability to ignore Mods/Admins'></i></td><td><select id='enableIgnore'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Rotating Signatures <i class='icon icon-question-sign' title='Signatures are taken randomly from a list of signatures that you provide'></i></td><td><select id='enableRotatingSigs'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>AMP in Board Navigation</td><td><select id='enableAMP'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Tracked Topics in Board Navigation</td><td><select id='enableTracked'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Search Topics at top of Board</td><td><select id='searchTopics'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
-							   "<tr><td>Message Filtering</td><td><select id='enableFilter'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Message Filtering <i class='icon icon-question-sign' title='Note: filters only work on retro skins if Message Poster Display: Above Message is selected in the Advanced Site Settings'></i></td><td><select id='enableFilter'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><th colspan='2'>Replace Links with Media</th></tr>" +
+							   "<tr><td colspan='2'>Note: These options only work if you've enabled clickable links in the gamefaqs advanced site settings</td></tr>" +
 							   "<tr><td>Embedded Videos <i class='icon icon-question-sign' title='Supported Formats: WebM, Youtube'></i></td><td><select id='enableWebm'><option value='type-2'>Enabled (Toggle)</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Images <i class='icon icon-question-sign' title='Use Thumbnails if you don&#39;t want to toggle to see images. Use Toggle otherwise.'></i></td><td><select id='enableTTI'><option value='type-1'>Thumbnails</option><option value='type-2'>Toggle</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Image thumbnails maximum height</td><td><input id='maxHeight' value=''>px</td>" +

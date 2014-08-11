@@ -1,3 +1,6 @@
+// Note: Filters only work on retro skins if "Message Poster Display" Above Message is enabled in
+// http://www.gamefaqs.com/user/options_advanced.html
+
 if(enableFilter == "checked") {
 	function filterCallback(user) {
 		return function() {

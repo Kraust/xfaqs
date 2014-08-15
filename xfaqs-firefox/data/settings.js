@@ -194,7 +194,7 @@ function sigDeleteCallback(i) {
 var aboutBody =
 				"<p>xFAQs - GameFAQs Improvements created by <a href='http://www.gamefaqs.com/users/Judgmenl/boards'>Judgmenl</a>.</p>" +
 				"<h3>Credits</h3>" +
-				"<p>Judgmenl (Developer)<br>HellHole_ (Hosting the Chrome version)<br>kirbymuncher (Quick Edit source code)</p>" +
+				"<p>Judgmenl (Developer)<br>HellHole_ (Hosting the Chrome version)<br>kirbymuncher (Quick Edit source code) <br>The TTI team for the Text-to-image and Text-to-video concept.</p>" +
 				"<p>The xFAQs site can be located at <a href='http://xfaqs.nostlagiasky.pw/'>nostlagiasky</a>";
 
 //var sigBody = "<span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span><p>1 line break and 160 characters allowed. Just like with regular sigs.<br> If you want a signature to apply to all boards or accounts leave the field blank.<br>Multiple boards and accounts are separated by commas.</p>";
@@ -329,7 +329,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 							   
 							   "<div id='tabs-2' style='padding-top:20px'>" +
 									
-									"<div style='float:left; width:100px; height:100px;'><img class='avatar' src='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/" + user + ".png' alt='' ></div>" +
+									"<div style='float:left; width:100px; height:100px;'><img class='avatar' src='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/" + user + ".png' alt='' ></div>" +
 									"<div style='float:left; padding-left:10px'><h4>Global Avatar Settings</h4> <ul id=settings class='paginate user' style='margin:0;padding:0;'> \
 										<li><a href='' id='av_left'>Avatars to the Left</a></li><li><a href='' id='av_right'>Avatars to the Right</a></li><li><a href='' id='av_no'>No Avatars</a></li></ul> \
 										<form id='submit' method='POST' enctype='multipart/form-data' > \
@@ -342,7 +342,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 										
 										"<div style='clear:both;padding-top:30px;'>Before uploading an avatar, you must change your Signature to upload:ok (<a href='http://puu.sh/9yTZJ/3acde356e0.png' target='_blank'>Example</a>). \
 											You can do that on <a href='http://www.gamefaqs.com/boards/sigquote.php' target='_blank'>this</a> page. You can change your signature back after the avatar is uploaded.<br> \
-											Avatars are loosely moderated and at any time you may see the gallery <a href='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/'>here</a>.<br> \
+											Avatars are loosely moderated and at any time you may see the gallery <a href='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/'>here</a>.<br> \
 											PM Judgmenl with any concerns.</div>" +
 											
 							   "</div>" +
@@ -634,7 +634,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$("#server_message").html("Uploading...");
 	
 		$.ajax( {
-			url: "http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/upload-v2.php",
+			url: "http://www.nostlagiasky.pw/gamefaqs-avatars/upload-v2.php",
 			dataType: "html",
 			type: "POST",
 			data: formData,

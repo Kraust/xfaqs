@@ -6,7 +6,7 @@ With this release all 3 versions (Firefox, Chrome) will be at the same version n
 
 Maxthon support is now going to be minimal as the only person I know that uses Maxthon no longer posts on GameFAQs
 
-**Version 0.25 Parody (Firefox and Chrome)**
+**Version 0.25 Parity (Firefox and Chrome)**
 * Removed exporting signatures due it breaking xfaqs on Linux and OSX
 * Implemented a new quick edit system from the ground up
 * Added many tooltips describing features and common user questions
@@ -22,3 +22,8 @@ Maxthon support is now going to be minimal as the only person I know that uses M
 * Added about page
 * Added support for embedded Youtube videos
 (Videos have been merged with TTI options but thumbnail size only applies to images)
+
+3x Plasma DHC
+1x Dyson Torp
+1x Dyson Prototype
+2x Omnis

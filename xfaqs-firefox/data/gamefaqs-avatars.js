@@ -45,7 +45,7 @@ if (enableAvatars === "checked") {
 			
 		// Renders the Upload UI	
 		if( user ) {
-			$("tbody").append("<div style='float:left; width:100px; height:100px;'><img class='avatar' src='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/" + user + ".png' alt='' ></div>" );
+			$("tbody").append("<div style='float:left; width:100px; height:100px;'><img class='avatar' src='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/" + user + ".png' alt='' ></div>" );
 			$("tbody").append("<div style='float:left; padding-left:10px'><h4>Global Avatar Settings</h4> <ul id=settings class='paginate user' style='margin:0;padding:0;'> \
 					<li><a href='' id='av_left'>Avatars to the Left</a></li><li><a href='' id='av_right'>Avatars to the Right</a></li><li><a href='' id='av_no'>No Avatars</a></li></ul> \
 					<form id='submit' method='POST' enctype='multipart/form-data' > \
@@ -63,8 +63,8 @@ if (enableAvatars === "checked") {
 			// Update Notes are down here.
 			$("tbody").append("<div style='clear:both;padding-left:10px;padding-top:30px;'><h4>Version 2.5.4</h4>+ Refactored a lot of code due to user Input<br> + New Design for people who use avatars to the left and message post display above.</div>");
 
-			$("tbody").append("<div style='clear:both;padding-left:10px;padding-top:30px;'><a href='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/' target='_blank'>GameFAQs Avatars</a> created by <a href='http://www.gamefaqs.com/users/Judgmenl/boards'>Judgmenl</a> - 2014.</div>");
-			$("tbody").append("<div style='clear:both;padding-left:10px;padding-top:0px;'>A listing of avatars can be located <a href='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/' target='_blank'>here</a>.</div>");
+			$("tbody").append("<div style='clear:both;padding-left:10px;padding-top:30px;'><a href='http://www.nostlagiasky.pw/gamefaqs-avatars/' target='_blank'>GameFAQs Avatars</a> created by <a href='http://www.gamefaqs.com/users/Judgmenl/boards'>Judgmenl</a> - 2014.</div>");
+			$("tbody").append("<div style='clear:both;padding-left:10px;padding-top:0px;'>A listing of avatars can be located <a href='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/' target='_blank'>here</a>.</div>");
 
 		}
 		
@@ -112,7 +112,7 @@ if (enableAvatars === "checked") {
 			$("#server_message").html("Uploading...");
 		
 			$.ajax( {
-				url: "http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/upload-v2.php",
+				url: "http://www.nostlagiasky.pw/gamefaqs-avatars/upload-v2.php",
 				dataType: "html",
 				type: "POST",
 				data: formData,
@@ -154,7 +154,7 @@ if (enableAvatars === "checked") {
 				<div class='head'><h2 class='title'>" + userName + "'s Avatar</h2></div> \
 					<div class='body'> \
 						<div class='details'> \
-							<img src='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/" + userName + ".png' alt=''> \
+							<img src='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/" + userName + ".png' alt=''> \
 						</div> \
 					</div> \
 				<div class='foot'></div> \
@@ -178,7 +178,7 @@ if (enableAvatars === "checked") {
 		
 			for( var i = 0; i < msgCount; i++) {
 				$("table.board").eq(i).css("position", "relative");
-				$("td.msg").eq(i).prepend("<div style=\"position:absolute; right:8px;\"><img class='avatar' src='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/" + 
+				$("td.msg").eq(i).prepend("<div style=\"position:absolute; right:8px;\"><img class='avatar' src='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/" + 
 													$(".name").eq(i).text().split(' ').join('%20') + ".png' alt='' style='max-width:100px; max-height:100px;'></div>" );
 				$(".msg_body").eq(i).css("padding-right", "110px");
 				$(".msg_body").eq(i).css("min-height", "100px");
@@ -198,7 +198,7 @@ if (enableAvatars === "checked") {
 		
 			if($('span.author_data:nth-child(2)').length != 0) {
 				for( var i = 0; i < msgCount; i++) {
-					$('span.author_data:nth-child(2)').eq(i).after("<img src='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/" + 
+					$('span.author_data:nth-child(2)').eq(i).after("<img src='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/" + 
 													$(".name").eq(i).text().split(' ').join('%20') + ".png' alt='' style='max-width:100px; max-height:100px;'>" );
 				}
 				
@@ -212,7 +212,7 @@ if (enableAvatars === "checked") {
 				
 				for( var i = 0; i < msgCount; i++) {
 					$(".top .author").eq(i).attr("colspan", "2");
-					$("tr.topmsg").eq(i).prepend("<td class='author'><img class='avatar' src='http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/avatars/" + 
+					$("tr.topmsg").eq(i).prepend("<td class='author'><img class='avatar' src='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/" + 
 													$(".name").eq(i).text().split(' ').join('%20') + ".png' alt='' style='max-width:100px; max-height:100px;'></td>" );
 					$(".msg_body").eq(i).css("min-height", "100px");
 					

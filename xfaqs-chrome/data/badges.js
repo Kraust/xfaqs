@@ -1,5 +1,5 @@
 $(function() {
-	$(document).tooltip( {
+	$("i").tooltip( {
 		position: { my: "left+0 center", at: "right+15 center" }, tooltipClass:'tooltip'
 	});
 });

@@ -230,3 +230,17 @@ if (enableIgnore === "checked") {
 }
 
 // Ignore+
+
+// Spoilers Test
+
+/*$("s").replaceWith(function(index) {
+	return $("<div class='spoiler spoiler-" + index + "'>").append($(this).contents());
+});
+
+$(".spoiler").each(function(index) {
+	$(this).before("<button id='spoilerButton-" + index + "' >Spoilers (click to view)</button>");
+	$("spoilerButton-" + index).click(function() {
+			$(".spoiler-" + index).toggle();
+	});
+});*/
+

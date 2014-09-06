@@ -1,3 +1,16 @@
+// Avatar Domain selector
+// avatarDomain { nostlagiasky.pw | cs.uml.edu/~rdupuis }
+var avatarDomain;
+
+if(localStorage.avatarDomain != null) {
+	avatarDomain = localStorage.avatarDomain;
+} else {
+	avatarDomain = "nostlagiasky.pw";
+	localStorage.setItem("avatarDomain", "nostlagiasky.pw");	
+}
+
+//
+
 if( localStorage.getItem("tcColor") != null) {
 	var tcColor = localStorage.getItem("tcColor");
 } else {
@@ -294,6 +307,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 	
 		$("tbody").append( "<div id='xfaqs-tabs'>" +
 							   "<ul class='content_nav content_nav_wrap'>" +
+							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-0'>News</a></li>" +
 							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-1'>General Settings</a></li>" +
 							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-2'>Avatar Settings</a></li>" +
   							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-3'>User Highlighting</a></li>" +
@@ -302,6 +316,9 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
   							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-6'>About</a></li>" +
 							   "</ul>" +
 							   
+							   // WIP Ajax Generated News Spot.
+							   "<div id='tabs-0' style='padding-top:20px'></div>" +
+							   
 							   "<div id='tabs-1' style='padding-top:20px'>" +
 							   "<table class='contrib'>" +
 							   "<tr><th colspan='2'>General Settings</th></tr>" +
@@ -309,6 +326,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 							   "<tr><td>Quick Edit</td><td><select id='enableQuickEdit'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Quick Topic</td><td><select id='enableQuickTopic'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>GameFAQs Avatars <i class='icon icon-question-sign' title='GameFAQs Avatars is a third party system that gives users a custom avatar of their choice.'></i></td><td><select id='enableAvatars'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Avatars domain <i class='icon icon-question-sign' title='only change this if you are having issues with seeing avatars'></i></td><td><select id='avatarDomain'><option>nostlagiasky.pw</option><option>cs.uml.edu/~rdupuis</option></td>" +
 							   "<tr><td>User Highlighting <i class='icon icon-question-sign' title='Works in V12 and V13 only'></i></td><td><select id='enableHighlight'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Ignore+ <i class='icon icon-question-sign' title='Ignore+ provides unlimited ignored users and the ability to ignore Mods/Admins'></i></td><td><select id='enableIgnore'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><td>Rotating Signatures <i class='icon icon-question-sign' title='Signatures are taken randomly from a list of signatures that you provide'></i></td><td><select id='enableRotatingSigs'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
@@ -329,7 +347,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 							   
 							   "<div id='tabs-2' style='padding-top:20px'>" +
 									
-									"<div style='float:left; width:100px; height:100px;'><img class='avatar' src='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/" + user + ".png' alt='' ></div>" +
+									"<div style='float:left; width:100px; height:100px;'><img class='avatar' src='http://www." + avatarDomain + "/gamefaqs-avatars/avatars/" + user + ".png' alt='' ></div>" +
 									"<div style='float:left; padding-left:10px'><h4>Global Avatar Settings</h4> <ul id=settings class='paginate user' style='margin:0;padding:0;'> \
 										<li><a href='' id='av_left'>Avatars to the Left</a></li><li><a href='' id='av_right'>Avatars to the Right</a></li><li><a href='' id='av_no'>No Avatars</a></li></ul> \
 										<form id='submit' method='POST' enctype='multipart/form-data' > \
@@ -340,10 +358,10 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 										<span id='server_message'>Maximum File Size: 200KB</span> \
 										</form></div>" +
 										
-										"<div style='clear:both;padding-top:30px;'>Before uploading an avatar, you must change your Signature to upload:ok (<a href='http://puu.sh/9yTZJ/3acde356e0.png' target='_blank'>Example</a>). \
-											You can do that on <a href='http://www.gamefaqs.com/boards/sigquote.php' target='_blank'>this</a> page. You can change your signature back after the avatar is uploaded.<br> \
-											Avatars are loosely moderated and at any time you may see the gallery <a href='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/'>here</a>.<br> \
-											PM Judgmenl with any concerns.</div>" +
+										"<div style='clear:both;padding-top:30px;'>- Before uploading an avatar, you must change your Signature to upload:ok (<a href='http://puu.sh/9yTZJ/3acde356e0.png' target='_blank'>Example</a>). \
+											You can do that on <a href='http://www.gamefaqs.com/boards/sigquote.php' target='_blank'>this</a> page.<br>- You can change your signature back after the avatar is uploaded.<br> \
+											- Avatars are loosely moderated and at any time you may see the gallery <a href='http://www.nostlagiasky.pw/gamefaqs-avatars/avatars/'>here</a>.<br> \
+											- PM Judgmenl with any concerns.</div>" +
 											
 							   "</div>" +
    							   "<div id='tabs-3' style='padding-top:20px'>" + highlightBody + "</div>" +
@@ -521,12 +539,13 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		
 		*/
 		
-		// sets options.		
+		// sets options.		 
 		$("#enableWebm").val(enableWebm);
 		$("#enableCode").val(enableCode);
 		$("#enableQuickEdit").val(enableQuickEdit);
 		$("#enableQuickTopic").val(enableQuickTopic);
 		$("#enableAvatars").val(enableAvatars);
+		$("#avatarDomain").val(avatarDomain);
 		$("#enableHighlight").val(enableHighlight);
 		$("#enableIgnore").val(enableIgnore);
 		//$("#enableBoardSelector").val(enableBoardSelector);
@@ -555,6 +574,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			localStorage.setItem("enableQuickEdit", $("#enableQuickEdit").val());
 			localStorage.setItem("enableQuickTopic", $("#enableQuickTopic").val());
 			localStorage.setItem("enableAvatars", $("#enableAvatars").val());
+			localStorage.setItem("avatarDomain", $("#avatarDomain").val());
 			localStorage.setItem("enableHighlight", $("#enableHighlight").val());
 			localStorage.setItem("enableIgnore", $("#enableIgnore").val());
 			//localStorage.setItem("enableBoardSelector", $("#enableBoardSelector").val());
@@ -625,29 +645,56 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 	
 	/* ajax request to handle the upload */
 
-	$("#submit_btn").click( function() {
-	
-	
-	
-		var formData = new FormData($('#submit')[0]);
-	
-		$("#server_message").html("Uploading...");
-	
-		$.ajax( {
-			url: "http://www.nostlagiasky.pw/gamefaqs-avatars/upload-v2.php",
-			dataType: "html",
-			type: "POST",
-			data: formData,
-			processData: false,
-			contentType: false
-		}).done(function( data ) {
-			$("#server_message").html(data);
-			if( data == 'Upload Successful! Refreshing to apply changes...') {
-				location.reload(true);
-			}
-		});
+		$("#submit_btn").click( function() {
 		
-	});
+		
+		
+			var formData = new FormData($('#submit')[0]);
+		
+			$("#server_message").html("Uploading...");
+		
+			$.ajax( {
+				url: "http://www.nostlagiasky.pw/gamefaqs-avatars/upload-v2.php",
+				dataType: "html",
+				type: "POST",
+				data: formData,
+				processData: false,
+				contentType: false,
+				async: false
+			}).done(function( data ) {
+				if( data == 'Upload Successful! Refreshing to apply changes...') {
+					$("#server_message").html("[1/2] Upload Successful!");
+				} else {
+					$("#server_message").html(data);
+				}
+			}).error(function() {
+				$("#server_message").html("[1/2] ERROR: Avatar not uploaded to nostlagiasky domain.");
+			});
+			
+			$.ajax( {
+				url: "http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/upload-v2.php",
+				dataType: "html",
+				type: "POST",
+				data: formData,
+				processData: false,
+				contentType: false,
+				async: false
+			}).done(function( data ) {
+				if( data == 'Upload Successful! Refreshing to apply changes...') {
+					$("#server_message").html("[2/2] Upload Successful! Refreshing to apply changes...");
+					location.reload(true);
+				} else {				
+					$("#server_message").html(data);
+					location.reload(true);
+				}
+			}).error(function() {
+				$("#server_message").html("[2/2] ERROR: Avatar not uploaded to weblab domain. Refreshing to apply changes...");
+				location.reload(true);
+
+			});
+
+			
+		});
 	
 	
 	/* storage setters */
@@ -662,6 +709,17 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 	$("#av_no").click( function() {
 		localStorage.setItem("avatar", "no");
 	});
+	
+	$.ajax( {
+		url: "http://nostlagiasky.pw/xfaqs/xfaqsnews.php",
+		dataType: "html",
+		type: "GET",
+	}).done(function( data ) {
+		$("#tabs-0").html(data);
+	}).error(function() {
+		$("#tabs-0").html("unable to get xfaqs news - your ISP could be blacklisting nostlagiasky.pw");
+	});
+
 	
 
 }

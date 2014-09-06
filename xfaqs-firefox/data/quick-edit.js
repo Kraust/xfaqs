@@ -165,9 +165,12 @@ if ((enableQuickEdit === "checked") && ($("input[name='key']").val() !== null)) 
 				
 				//$('td.msg').eq(i).html(content);
 				
-				$('td.msg').eq(i).html(textarea);
-				$('td.msg').eq(i).prepend(formatter);
-				$('td.msg').eq(i).append("<div style='display:block'><button class='btn btn_primary' id='editBtn-" + i + "'>Edit</button> <button class='btn' id='cancelBtn-" + i + "'>Cancel</button></div>");
+				$('td.msg').eq(i).html("<form id='qe-" + i + "' method='post' action='" + postUrl + "'><input type='hidden' value='" + key + "' name='key'><input type='hidden' value='Post without Preview' name='post'></form>");
+				$("#qe-" + i).append(textarea);
+				$("#qe-" + i).prepend(formatter);
+				$("#qe-" + i).append("<textarea type='hidden' name='custom_sig' style='width:100%'>" + sig + "</textarea>");
+				$("#qe-" + i).append("<div style='display:block'><button class='btn btn_primary' id='editBtn-" + i + "'>Edit</button> <button class='btn' id='cancelBtn-" + i + "'>Cancel</button></div>");
+				
 				
 				$('[name="b"]').click(function() {txtTagEdit('b');});
 				$('[name="i"]').click(function() {txtTagEdit('i');});
@@ -176,13 +179,19 @@ if ((enableQuickEdit === "checked") && ($("input[name='key']").val() !== null)) 
 				$('[name="quote"]').click(function() {txtTagEdit('quote');});
 				$('[name="code"]').click(function() {txtTagEdit('code');});
 							
-				$('#editBtn-' + i).click(function() {
-					$.post( postUrl, { key: key, messagetext: $('td.msg textarea').val(), post: "Post without Preview", custom_sig: sig } ).success(function() {
+				/*$('#editBtn-' + i).click(function() {
+					//$.post( postUrl, { key: key, messagetext: escape($('td.msg textarea').val()), post: "Post without Preview", custom_sig: sig } ).success(function() {
+					$.ajax({
+						type: "POST",
+						url: postUrl, 
+						data: { key: key, messagetext: $('td.msg textarea').val(), post: "Post without Preview", custom_sig: sig }, 
+						contentType: "application/x-www-form-urlencoded; charset=ISO-8859-1"
+					}).success(function() {
 						location.reload(true);
 					}).error(function() {
 						alert("Unable to edit post. This may be because you've edited your post the maximum amount of times, or your time limit has expired");
 					});
-				});
+				});*/
 				
 				$("#cancelBtn-" + i).click(function() {
 						$('td.msg').eq(i).html(msg);

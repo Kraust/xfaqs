@@ -67,7 +67,7 @@ if (enableAvatars === "checked") {
 					<input class='btn' type='file' name='file' accept='image/*' id='file'> \
 					<input class='btn btn_primary' type='button' id='submit_btn' value='Upload'> \
 					<input style='display:none' type='text' name='dest' value='GameFAQs-Avatars'> \
-					<input style='display:none' type='text' name='user' value='" + user + " '> \
+					<input style='display:none' type='text' name='user' value='" + upload_user + "'> \
 					<span id='server_message'>Maximum File Size: 100KB</span> \
 					</form></div>");
 				
@@ -229,7 +229,7 @@ if (enableAvatars === "checked") {
 
 			$('img').error(function() {
 				$(this).parent().next().css("padding-right", "0px");
-				//$(this).parent().next().css("min-height", "0px");		// xfaqs new sigs fix.
+				$(this).parent().next().css("min-height", "0px");		
 				$(this).remove(); 
 			});
 

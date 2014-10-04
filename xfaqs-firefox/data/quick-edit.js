@@ -178,6 +178,7 @@ if ((enableQuickEdit === "checked") && ($("input[name='key']").val() !== null)) 
 				$('[name="cite"]').click(function() {txtTagEdit('cite');});
 				$('[name="quote"]').click(function() {txtTagEdit('quote');});
 				$('[name="code"]').click(function() {txtTagEdit('code');});
+				$('[name="strike"]').click(function() {txtTagEdit('strike');});
 							
 				/*$('#editBtn-' + i).click(function() {
 					//$.post( postUrl, { key: key, messagetext: escape($('td.msg textarea').val()), post: "Post without Preview", custom_sig: sig } ).success(function() {

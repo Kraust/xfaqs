@@ -23,8 +23,7 @@ pageMod.PageMod({
 						data.url("tracked-topics.js"),
 						data.url("hotkeys.js"),
 						data.url("badges.js"),
-						data.url("tti.js"),
-						data.url("account-switcher.js")],
+						data.url("tti.js")],
 
 	contentScriptWhen: "ready"
 });

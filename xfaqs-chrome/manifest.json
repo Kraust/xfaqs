@@ -4,7 +4,7 @@
 	"name": "xFAQs",
 	"author": "Judgmenl",
 	"description": "Improvements for GameFAQs",
-	"version": "0.40",
+	"version": "1.0",
 	"homepage_url": "http://weblab.cs.uml.edu/~rdupuis/xfaqs/",
 
 	"icons": { "16": "data/img/icon.png", "48": "data/img/icon.png", "128": "data/img/icon.png" },
@@ -30,14 +30,14 @@
 						"data/tracked-topics.js",
 						"data/hotkeys.js",
 						"data/badges.js",
-						"data/tti.js"],
+						"data/account-switcher.js"],
 				"css": ["data/xfaqs-main.css", "data/spectrum.css"],
 				"run_at": "document_end"
 			},
 			
 			{
 				"matches": ["http://*.gamefaqs.com/*"],
-				"js": ["data/gamefaqs-avatars.js"],
+				"js": ["data/gamefaqs-avatars.js", "data/tti.js"],
 				"run_at": "document_idle"
 			}
 

@@ -1,14 +1,6 @@
 // Avatar Domain selector
 // avatarDomain { nostlagiasky.pw | cs.uml.edu/~rdupuis }
-var avatarDomain = "nostlagiasky.pw";
-
-var removeSig = localStorage.removeSig;
-var sigTTI = localStorage.sigTTI;
-var accountSwitcher = localStorage.getItem("accountSwitcher");
-
-if( localStorage.getItem("accountSwitcher") === null) {
-	localStorage.setItem("accountSwitcher", "not-checked");
-}
+var avatarDomain;
 
 if(localStorage.avatarDomain != null) {
 	avatarDomain = localStorage.avatarDomain;
@@ -44,23 +36,7 @@ if( localStorage.getItem("vipColor") != null) {
 }
 
 if(	localStorage.getItem("sigList") != null ) {
-
-	try {
-		var sigList = JSON.parse(localStorage.getItem("sigList"));
-	} catch(e) {
-		var sigList =
-		{ 	
-			"signatures": [
-					{
-						"boards": [""],
-						"accounts": [""],
-						"signature": "powered by xfaqs"
-					}
-			]
-		};
-		
-		localStorage.setItem("sigList", JSON.stringify(sigList));
-	}
+	var sigList = JSON.parse(localStorage.getItem("sigList"));
 
 } else {
  
@@ -229,42 +205,25 @@ function sigDeleteCallback(i) {
 }
 
 var aboutBody =
-				"<p>xFAQs v1.0 - GameFAQs Improvements created by <a href='http://www.gamefaqs.com/users/Judgmenl/boards'>Judgmenl</a>.</p>" +
+				"<p>xFAQs - GameFAQs Improvements created by <a href='http://www.gamefaqs.com/users/Judgmenl/boards'>Judgmenl</a>.</p>" +
 				"<h3>Credits</h3>" +
 				"<p>Judgmenl (Developer)<br>HellHole_ (Hosting the Chrome version)<br>kirbymuncher (Quick Edit source code) <br>The TTI team for the Text-to-image and Text-to-video concept.</p>" +
 				"<p>The xFAQs site can be located at <a href='http://xfaqs.nostlagiasky.pw/'>nostlagiasky</a>";
 
 //var sigBody = "<span style='float:right;'><input type='file' class='btn' id='importSigFiles' name='files[]'> <button class='btn' id='importSigs' disabled>Import</button> <button class='btn' id='exportSigs'>Export</button></span><p>1 line break and 160 characters allowed. Just like with regular sigs.<br> If you want a signature to apply to all boards or accounts leave the field blank.<br>Multiple boards and accounts are separated by commas.</p>";
 var sigBody = "<p style='float:left'>1 line break and 160 characters allowed. Just like with regular sigs.<br> If you want a signature to apply to all boards or accounts leave the field blank.<br>Multiple boards and accounts are separated by commas.</p>";
-sigBody += " <div style='float:right'><button  class='btn btn_primary' id='sig_export'>Export Signature Data</button> ";
-sigBody += " <button class='btn' id='sig_import'>Import Signature Data</button></div> ";
+sigBody += "<button style='float:right' class='btn btn_primary' id='sig_export'>Export Signature Data</button>";
 
 
 // Sig Export Widget.
-$("body").append("<div id='sigWidget' style='display:none'><p>Save this text data in a text file</p><textarea id='sigbackup' style='width:100%; height:500px;' readonly>" + JSON.stringify(JSON.parse(localStorage.sigList),null,"\t") + "</textarea></div>");
+$("body").append("<div id='sigWidget' style='display:none'><textarea id='sigbackup' style='width:100%; height:500px;' readonly>" + JSON.stringify(JSON.parse(localStorage.sigList),null,"\t") + "</textarea></div>");
 $("#sigWidget").dialog({
 	 autoOpen: false,
 	 height: "auto",
 	 width: 1100,
 });
 
-// Import Sig Widget
-$("body").append("<div id='sigWidgetI' style='display:none'><p>Paste the contents of Export Signature Data into this box and click Save.</p><textarea id='siginport' style='width:100%; height:500px;'>" + "" + "</textarea><p><br><button id='okToSaveSig'>Save</button></p></div>");
-$("#sigWidgetI").dialog({
-	 autoOpen: false,
-	 height: "auto",
-	 width: 1100,
-});
-
-$("#okToSaveSig").click(function() {
-	var sigData = $("#siginport").val();
-	localStorage.setItem("sigList", sigData);
-	location.reload(true);
-});
-
-
 $("#sigWidget").parent().addClass("reg_dialog");
-$("#sigWidgetI").parent().addClass("reg_dialog");
 $("button").addClass("btn");
 
 var sigNumber = 0;
@@ -329,80 +288,7 @@ highlightBody +=	"<table id='table-'" + (groupNumber + 1) + ">" +
 					"</table>";
 
 
-
-// Account Switcher Code!     /////////////////////////////
-// It should probably be in its own file //////////////////
-
-function asAddCallback(i) {
-	return function() {
-
-		$("#asAdd").attr("disabled", "disabled");
 					
-		accountJSON.accounts.push( 
-			{
-				"name": $("#asUser-" + i).val(),
-				"pass": $("#asPass-" + i).val()
-			});
-
-	
-		localStorage.setItem("accountJSON", JSON.stringify(accountJSON));
-		document.location = "/boards/user.php?settings=1#tabs-7";
-		location.reload(true);
-		
-	}
-}
-
-function asDeleteCallback(i) {
-	return function() {
-		$("#asDeleteBtn-" + i).attr("disabled", "disabled");
-		
-		accountJSON.accounts.splice((i-1), 1);
-		localStorage.setItem("accountJSON", JSON.stringify(accountJSON));
-		
-		document.location = "/boards/user.php?settings=1#tabs-7";
-		location.reload(true);
-
-	}
-}
-
-
-var switcherBody = "<h3>Account Switcher Settings</h3>";
-	switcherBody += "<p>Note: This is super dangerous. Passwords are saved unencrypted in localStorage. Please use this with caution. " +
-						"<b>I have no access to your account information and am not liable for anything that may happen as a result of using this feature!</b></p>";
-
-if(	localStorage.getItem("accountJSON") != null ) {
-	var accountJSON = JSON.parse(localStorage.getItem("accountJSON"));
-
-} else {
- 
-
-	var accountJSON =
-	{ 	
-		"accounts": [
-		
-		]
-	};
-	
-	localStorage.setItem("accountJSON", JSON.stringify(accountJSON));
-	
-}
-
-var accNumber = 0;
-
-switcherBody += "<table>";
-
-for( accNumber; accNumber < accountJSON.accounts.length; accNumber++) {
-	switcherBody += "<tr><td>Username</td><td><input id='asUser-" + (accNumber + 1) + "' style='width:100%' value=\"" + accountJSON.accounts[accNumber].name + "\"></td><td>Password</td><td><input type='password' id='asPass-" + (accNumber + 1) + "' style='width:100%' value=\"" + accountJSON.accounts[accNumber].pass + "\"></td><td><button class='btn' id='asDeleteBtn-" + (accNumber + 1) + "'>Remove</button></td></tr>";
-}
-
-switcherBody += "<tr><td>Username</td><td><input id='asUser-" + (accNumber + 1) + "' style='width:100%' value=\"" + "" + "\"></td><td>Password</td><td><input type='password' id='asPass-" + (accNumber + 1) + "' style='width:100%' value=\"" + "" + "\"></td><td><button class='btn' id='asAdd'>Add</button></td></tr>";
-
-switcherBody += "</table>";
-
-
-//////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////
-
 						
 //$(".masthead_user").prepend("<a href='/boards/565885-blood-money/'>xFAQs Help</a> <a href='/boards/user.php?settings=1'>xFAQs Settings <i class='icon icon-cog'></i></a> ");
 $(".masthead_user").prepend("<span class='masthead_mygames_drop'><a href='/boards/user.php?settings=1'>xFAQs Settings <i class='icon icon-cog'></i></a><ul class='masthead_mygames_subnav' style='width:200px;left:-1px;'><li class='masthead_mygames_subnav_item'><a href='/boards/565885-blood-money/'>xFAQs Help</a></li></ul></span> ");
@@ -440,36 +326,33 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
   							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-3'>User Highlighting</a></li>" +
   							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-4'>Ignore List+</a></li>" +
   							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-5'>Rotating Signatures</a></li>" +
-  							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-7'>Account Switcher</a></li>" +
-   							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-6'>About</a></li>" +
+  							   "<li class='cnav_item' style='border-radius: 5px; cursor: pointer;'><a href='#tabs-6'>About</a></li>" +
 							   "</ul>" +
 							   
+							   // WIP Ajax Generated News Spot.
 							   "<div id='tabs-0' style='padding-top:20px'></div>" +
 							   
 							   "<div id='tabs-1' style='padding-top:20px'>" +
 							   "<table class='contrib'>" +
 							   "<tr><th colspan='2'>General Settings</th></tr>" +
-							   "<tr style='display:none;'><td>Improved code tags</td><td><select id='enableCode'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Quick Edit</td><td><select id='enableQuickEdit'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Quick Topic</td><td><select id='enableQuickTopic'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>GameFAQs Avatars <i class='icon icon-question-sign' title='GameFAQs Avatars is a third party system that gives users a custom avatar of their choice.'></i></td><td><select id='enableAvatars'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   //"<tr><td>Avatars domain <i class='icon icon-question-sign' title='only change this if you are having issues with seeing avatars'></i></td><td><select id='avatarDomain'><option>nostlagiasky.pw</option><option>cs.uml.edu/~rdupuis</option></td></tr>" +
-							   "<tr><td>User Highlighting <i class='icon icon-question-sign' title='Works in V12 and V13 only'></i></td><td><select id='enableHighlight'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Ignore+ <i class='icon icon-question-sign' title='Ignore+ provides unlimited ignored users and the ability to ignore Mods/Admins'></i></td><td><select id='enableIgnore'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Rotating Signatures <i class='icon icon-question-sign' title='Signatures are taken randomly from a list of signatures that you provide'></i></td><td><select id='enableRotatingSigs'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>AMP in Board Navigation</td><td><select id='enableAMP'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Tracked Topics in Board Navigation</td><td><select id='enableTracked'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Search Topics at top of Board</td><td><select id='searchTopics'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Message Filtering <i class='icon icon-question-sign' title='Note: filters only work on retro skins if Message Poster Display: Above Message is selected in the Advanced Site Settings'></i></td><td><select id='enableFilter'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Remove Signatures</td><td><select id='removeSig'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Account Switcher</td><td><select id='accountSwitcher'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
+							   "<tr style='display:none;'><td>Improved code tags</td><td><select id='enableCode'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Quick Edit</td><td><select id='enableQuickEdit'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Quick Topic</td><td><select id='enableQuickTopic'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>GameFAQs Avatars <i class='icon icon-question-sign' title='GameFAQs Avatars is a third party system that gives users a custom avatar of their choice.'></i></td><td><select id='enableAvatars'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Avatars domain <i class='icon icon-question-sign' title='only change this if you are having issues with seeing avatars'></i></td><td><select id='avatarDomain'><option>nostlagiasky.pw</option><option>cs.uml.edu/~rdupuis</option></td>" +
+							   "<tr><td>User Highlighting <i class='icon icon-question-sign' title='Works in V12 and V13 only'></i></td><td><select id='enableHighlight'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Ignore+ <i class='icon icon-question-sign' title='Ignore+ provides unlimited ignored users and the ability to ignore Mods/Admins'></i></td><td><select id='enableIgnore'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Rotating Signatures <i class='icon icon-question-sign' title='Signatures are taken randomly from a list of signatures that you provide'></i></td><td><select id='enableRotatingSigs'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>AMP in Board Navigation</td><td><select id='enableAMP'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Tracked Topics in Board Navigation</td><td><select id='enableTracked'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Search Topics at top of Board</td><td><select id='searchTopics'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Message Filtering <i class='icon icon-question-sign' title='Note: filters only work on retro skins if Message Poster Display: Above Message is selected in the Advanced Site Settings'></i></td><td><select id='enableFilter'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td>" +
 							   "<tr><th colspan='2'>Replace Links with Media</th></tr>" +
 							   "<tr><td colspan='2'>Note: These options only work if you've enabled clickable links in the gamefaqs advanced site settings</td></tr>" +
-							   "<tr><td>Embedded Videos <i class='icon icon-question-sign' title='Supported Formats: WebM, Youtube'></i></td><td><select id='enableWebm'><option value='type-2'>Enabled (Toggle)</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Images <i class='icon icon-question-sign' title='Use Thumbnails if you don&#39;t want to toggle to see images. Use Toggle otherwise.'></i></td><td><select id='enableTTI'><option value='type-1'>Thumbnails</option><option value='type-2'>Toggle</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>TTI in Sigs</td><td><select id='sigTTI'><option value='checked'>Enabled</option><option value='not-checked'>Disabled</option></select></td></tr>" +
-							   "<tr><td>Image thumbnails maximum height</td><td><input id='maxHeight' value=''>px</td></tr>" +
-							   "<tr><td>Image thumbnails maximum width</td><td><input id='maxWidth' value=''>px</td></tr>" +
+							   "<tr><td>Embedded Videos <i class='icon icon-question-sign' title='Supported Formats: WebM, Youtube'></i></td><td><select id='enableWebm'><option value='type-2'>Enabled (Toggle)</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Images <i class='icon icon-question-sign' title='Use Thumbnails if you don&#39;t want to toggle to see images. Use Toggle otherwise.'></i></td><td><select id='enableTTI'><option value='type-1'>Thumbnails</option><option value='type-2'>Toggle</option><option value='not-checked'>Disabled</option></select></td>" +
+							   "<tr><td>Image thumbnails maximum height</td><td><input id='maxHeight' value=''>px</td>" +
+							   "<tr><td>Image thumbnails maximum width</td><td><input id='maxWidth' value=''>px</td>" +
 							   "<tr><td colspan='2'><input type='submit' id='updateGeneral' class='btn' value='Update xFAQs Settings'><span style='float:right;'><form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'><input type='hidden' name='cmd' value='_s-xclick'><input type='hidden' name='hosted_button_id' value='XABH3W5N9JNCQ'><input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'><img alt='paypal' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'></form></span></td></tr>" +
 							   "</table>" +
 							   "</div>" +
@@ -498,19 +381,12 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
    							   "<div id='tabs-4' style='padding-top:20px'>" + ignoreBody + "</div>" +
    							   "<div id='tabs-5' style='padding-top:20px'>" + sigBody + "</div>" +
    							   "<div id='tabs-6' style='padding-top:20px'>" + aboutBody + "</div>" +
-   							   "<div id='tabs-7' style='padding-top:20px'>" + switcherBody + "</div>" +
 							"</div>");
 						   
-		$("#asAdd").click(asAddCallback(accNumber + 1));
-
-		for(var i = 0; i < accNumber; i++) {
-			$("#asDeleteBtn-" + (i + 1)).click(asDeleteCallback(i + 1));
-		}
-		
 		$(function() {
 			$("#xfaqs-tabs").tabs();
 		});
-		
+				
 		for(var i = 0; i < groupNumber; i++) {
 				
 			$("#highlightBtn-" + (i + 1)).button();
@@ -682,7 +558,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$("#enableQuickEdit").val(enableQuickEdit);
 		$("#enableQuickTopic").val(enableQuickTopic);
 		$("#enableAvatars").val(enableAvatars);
-		$("#avatarDomain").val("nostlagiasky.pw");
+		$("#avatarDomain").val(avatarDomain);
 		$("#enableHighlight").val(enableHighlight);
 		$("#enableIgnore").val(enableIgnore);
 		//$("#enableBoardSelector").val(enableBoardSelector);
@@ -698,9 +574,6 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$("#color-vip").val(enableTracked);
 		$("#searchTopics").val(searchTopics);
 		$("#enableFilter").val(enableFilter);
-		$("#removeSig").val(removeSig);
-		$("#sigTTI").val(sigTTI);
-		$("#accountSwitcher").val(accountSwitcher);
 
 
 		// Updates General Settings	
@@ -714,7 +587,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			localStorage.setItem("enableQuickEdit", $("#enableQuickEdit").val());
 			localStorage.setItem("enableQuickTopic", $("#enableQuickTopic").val());
 			localStorage.setItem("enableAvatars", $("#enableAvatars").val());
-			localStorage.setItem("avatarDomain", "nostlagiasky.pw");
+			localStorage.setItem("avatarDomain", $("#avatarDomain").val());
 			localStorage.setItem("enableHighlight", $("#enableHighlight").val());
 			localStorage.setItem("enableIgnore", $("#enableIgnore").val());
 			//localStorage.setItem("enableBoardSelector", $("#enableBoardSelector").val());
@@ -730,9 +603,6 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 			localStorage.setItem("vipColor", $("#color-vip").val());
 			localStorage.setItem("searchTopics", $("#searchTopics").val());
 			localStorage.setItem("enableFilter", $("#enableFilter").val());
-			localStorage.setItem("removeSig", $("#removeSig").val());
-			localStorage.setItem("sigTTI", $("#sigTTI").val());
-			localStorage.setItem("accountSwitcher", $("#accountSwitcher").val());
 			document.location = "/boards/user.php?settings=1#tabs-1";
 			location.reload(true);
 		});
@@ -792,12 +662,6 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 		$("#sigWidget").dialog("open");
 	});
 	
-	$("#sig_import").click(function() {
-		$("#sigWidgetI").dialog("open");
-	});
-	
-
-	
 	/* ajax request to handle the upload */
 
 		$("#submit_btn").click( function() {
@@ -818,16 +682,15 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 				async: false
 			}).done(function( data ) {
 				if( data == 'Upload Successful! Refreshing to apply changes...') {
-					$("#server_message").html(data);
-					location.reload(true);
+					$("#server_message").html("[1/2] Upload Successful!");
 				} else {
 					$("#server_message").html(data);
 				}
 			}).error(function() {
-				$("#server_message").html("Avatar not uploaded to nostlagiasky domain. Service may be unavailable.");
+				$("#server_message").html("[1/2] ERROR: Avatar not uploaded to nostlagiasky domain.");
 			});
 			
-			/*$.ajax( {
+			$.ajax( {
 				url: "http://weblab.cs.uml.edu/~rdupuis/gamefaqs-avatars/upload-v2.php",
 				dataType: "html",
 				type: "POST",
@@ -847,7 +710,7 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 				$("#server_message").html("[2/2] ERROR: Avatar not uploaded to weblab domain. Refreshing to apply changes...");
 				location.reload(true);
 
-			});*/
+			});
 
 			
 		});

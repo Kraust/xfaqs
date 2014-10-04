@@ -1,3 +1,8 @@
+
+// Old version of kirbymubcher's quick edit no longer used.
+// 1. This is because of message board overhaul: http://www.gamefaqs.com/boards/6-gamefaqs-announcements/70205989
+// 2. And the fact that I made a better version.
+
 /*var win = window.content.document.defaultView.wrappedJSObject;
 
 
@@ -138,6 +143,10 @@ if(typeof(Storage)!=="undefined") {
 	var enableQuickEdit;
 }
 
+// This is version 2 of the quick edit script.
+// I took kirbymuncher's quick edit (listed above) and modified it.
+// This should work after Message Board Overhaul: http://www.gamefaqs.com/boards/6-gamefaqs-announcements/70205989
+
 if ((enableQuickEdit === "checked") && ($("input[name='key']").val() !== null)) {
 
 
@@ -163,7 +172,6 @@ if ((enableQuickEdit === "checked") && ($("input[name='key']").val() !== null)) 
 				var key = response.match(/key" value="([^"]*)"/)[1];
 				var sig = $("[name=custom_sig]").val();
 				
-				//$('td.msg').eq(i).html(content);
 				
 				$('td.msg').eq(i).html("<form id='qe-" + i + "' method='post' action='" + postUrl + "'><input type='hidden' value='" + key + "' name='key'><input type='hidden' value='Post without Preview' name='post'></form>");
 				$("#qe-" + i).append(textarea);
@@ -178,21 +186,7 @@ if ((enableQuickEdit === "checked") && ($("input[name='key']").val() !== null)) 
 				$('[name="cite"]').click(function() {txtTagEdit('cite');});
 				$('[name="quote"]').click(function() {txtTagEdit('quote');});
 				$('[name="code"]').click(function() {txtTagEdit('code');});
-				$('[name="strike"]').click(function() {txtTagEdit('strike');});
 							
-				/*$('#editBtn-' + i).click(function() {
-					//$.post( postUrl, { key: key, messagetext: escape($('td.msg textarea').val()), post: "Post without Preview", custom_sig: sig } ).success(function() {
-					$.ajax({
-						type: "POST",
-						url: postUrl, 
-						data: { key: key, messagetext: $('td.msg textarea').val(), post: "Post without Preview", custom_sig: sig }, 
-						contentType: "application/x-www-form-urlencoded; charset=ISO-8859-1"
-					}).success(function() {
-						location.reload(true);
-					}).error(function() {
-						alert("Unable to edit post. This may be because you've edited your post the maximum amount of times, or your time limit has expired");
-					});
-				});*/
 				
 				$("#cancelBtn-" + i).click(function() {
 						$('td.msg').eq(i).html(msg);

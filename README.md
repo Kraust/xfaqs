@@ -6,6 +6,19 @@ With this release all 3 versions (Firefox, Chrome) will be at the same version n
 
 Maxthon support is now going to be minimal as the only person I know that uses Maxthon no longer posts on GameFAQs
 
+**Version 1.0 (Firefox and Chrome)**
+* Added New Feature: Account Switcher
+* Added New Feature: strikeout tags
+* Added New Feature: Filter Signatures
+* Added New Feature: Disable TTI in Signatures
+* Added New Feature: Importing and Exporting Signatures
+* code tags in signatures are now parsed as code text like they used to be
+* signatures in xfaqs are formatted slightly differently and as a result, avatars to the left of a post may stretch the page.
+* Old avatar domain has been removed. All avatars are now hosted on nostlagiasky.
+* Users experiencing issues accessing nostlagiasky (mainly ATT customers) should not have issues anymore.
+* Post Hotkey is fixed.
+* About page now displays version number.
+
 **Version 0.40 (Firefox and Chrome)**
 * New news page
 * Quick edit and quick topic now support all of the characters that regular posting does

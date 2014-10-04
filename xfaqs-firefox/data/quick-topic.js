@@ -50,6 +50,7 @@ if(enableQuickTopic == "checked") {
 				$('[name="cite"]').click(function() {txtTagEdit('cite');});
 				$('[name="quote"]').click(function() {txtTagEdit('quote');});
 				$('[name="code"]').click(function() {txtTagEdit('code');});
+				$('[name="strike"]').click(function() {txtTagEdit('strike');});
 
 				
 				$("#qt-close").click(function() {

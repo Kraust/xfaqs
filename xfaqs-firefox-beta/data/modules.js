@@ -50,7 +50,6 @@ if(typeof(Storage)!=="undefined") {
 	var enableAvatars = localStorage.getItem("enableAvatars");
 	var enableHighlight = localStorage.getItem("enableHighlight");
 	var searchTopics = localStorage.getItem("searchTopics");
-	var removeSig = localStorage.getItem("removeSig");
 	
 } else {
 	var storage = "left";
@@ -60,7 +59,6 @@ if(typeof(Storage)!=="undefined") {
 	var enableAvatars;
 	var searchTopics;
 	var enableHighlight;
-	var removeSig;
 
 }
 
@@ -71,41 +69,8 @@ var formatter = '<span class="tagbuttons"> \
 					<input type="button"  value="Cite" class="btn btn_mini btncite" name="cite" tabindex="-1"> \
 					<input type="button"  value="Quote" class="btn btn_mini" name="quote" tabindex="-1"> \
 					<input type="button"  value="Code" class="btn btn_mini btncode" name="code" tabindex="-1"> \
-					<input type="button"  value="Strike" class="btn btn_mini" name="strike" tabindex="-1"> \
 				</span>';
 
-
-if($(".tagbuttons").size()) 
-{
-	$(".tagbuttons").html(formatter);
-	$('[name="b"]').click(function() {txtTagEdit('b');});
-	$('[name="i"]').click(function() {txtTagEdit('i');});
-	$('[name="spoiler"]').click(function() {txtTagEdit('spoiler');});
-	$('[name="cite"]').click(function() {txtTagEdit('cite');});
-	$('[name="quote"]').click(function() {txtTagEdit('quote');});
-	$('[name="code"]').click(function() {txtTagEdit('code');});
-	$('[name="strike"]').click(function() {txtTagEdit('strike');});
-
-}
-				
-// $(".msg_body").css("minHeight", "100px");		
-			
-// strike and code tags
-$('.msg_body').each(function(){
-    $(this).html($(this).html()
-		.split('&lt;strike&gt;').join('<strike>').split('&lt;/strike&gt;').join('</strike>')
-		.split('&lt;code&gt;').join('<code>').split('&lt;/code&gt;').join('</code>'));
-});
-
-// sigs
-for( var i = 0; i < $("td.msg").size(); i++)
-  $("td.msg").eq(i).html($("td.msg").eq(i).html().replace(/(.*)<br>---<br>/, "$1</div><div class='sig'><br>---<br>"));
-
-
-// sig remover
-if(removeSig === "checked") {
-	$(".sig").hide();
-}
 
 if(searchTopics == "checked") {
 	$(".board_nav").prepend($(".searchtopics").css("margin", "0"));

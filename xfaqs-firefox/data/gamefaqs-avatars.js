@@ -223,7 +223,8 @@ if (enableAvatars === "checked") {
 				$("td.msg").eq(i).prepend("<div style=\"position:absolute; right:8px;\"><img class='avatar' src='http://www." + avatarDomain + "/gamefaqs-avatars/avatars/" + 
 													$(".name").eq(i).text().split(' ').join('%20') + ".png' alt='' style='max-width:100px; max-height:100px;'></div>" );
 				$(".msg_body").eq(i).css("padding-right", "110px");
-				$(".msg_body").eq(i).css("min-height", "100px");
+				$(".sig").eq(i).css("padding-right", "110px"); // xfaqs v1.01 signature fix
+				// $(".msg_body").eq(i).css("min-height", "100px");
 
 			}
 

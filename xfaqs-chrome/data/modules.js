@@ -99,7 +99,7 @@ $('.msg_body').each(function(){
 
 // sigs
 for( var i = 0; i < $("td.msg").size(); i++)
-  $("td.msg").eq(i).html($("td.msg").eq(i).html().replace(/(.*)<br>---<br>/, "$1</div><div class='sig'><br>---<br>"));
+  $("td.msg").eq(i).html($("td.msg").eq(i).html().replace(/(.*)<br>---<br>/, "$1</div><div class='sig'>---<br>"));
 
 
 // sig remover

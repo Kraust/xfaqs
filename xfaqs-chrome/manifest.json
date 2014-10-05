@@ -4,7 +4,7 @@
 	"name": "xFAQs",
 	"author": "Judgmenl",
 	"description": "Improvements for GameFAQs",
-	"version": "1.1",
+	"version": "1.2",
 	"homepage_url": "http://weblab.cs.uml.edu/~rdupuis/xfaqs/",
 
 	"icons": { "16": "data/img/icon.png", "48": "data/img/icon.png", "128": "data/img/icon.png" },

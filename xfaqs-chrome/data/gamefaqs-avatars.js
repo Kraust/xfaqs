@@ -220,8 +220,8 @@ if (enableAvatars === "checked") {
 		
 			for( var i = 0; i < msgCount; i++) {
 				$("table.board").eq(i).css("position", "relative");
-				$("td.msg").eq(i).prepend("<div style=\"position:absolute; right:8px;\"><img class='avatar' src='http://www." + avatarDomain + "/gamefaqs-avatars/avatars/" + 
-													$(".name").eq(i).text().split(' ').join('%20') + ".png' alt='' style='max-width:100px; max-height:100px;'></div>" );
+				$("td.msg").eq(i).prepend("<img class='avatar' src='http://www." + avatarDomain + "/gamefaqs-avatars/avatars/" + 
+													$(".name").eq(i).text().split(' ').join('%20') + ".png' alt='' style='max-width:100px; max-height:100px; float: right;'>" );
 				$(".msg_body").eq(i).css("padding-right", "110px");
 				$(".sig").eq(i).css("padding-right", "110px"); // xfaqs v1.01 signature fix
 				// $(".msg_body").eq(i).css("min-height", "100px");
@@ -230,7 +230,7 @@ if (enableAvatars === "checked") {
 
 			$('img').error(function() {
 				$(this).parent().next().css("padding-right", "0px");
-				//$(this).parent().next().css("min-height", "0px");		// xfaqs new sigs fix.
+				$(this).parent().next().css("min-height", "100px");		// xfaqs new sigs fix.
 				$(this).remove(); 
 			});
 

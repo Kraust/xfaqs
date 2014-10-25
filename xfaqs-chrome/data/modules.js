@@ -72,6 +72,7 @@ var formatter = '<span class="tagbuttons"> \
 					<input type="button"  value="Quote" class="btn btn_mini" name="quote" tabindex="-1"> \
 					<input type="button"  value="Code" class="btn btn_mini btncode" name="code" tabindex="-1"> \
 					<input type="button"  value="Strike" class="btn btn_mini" name="strike" tabindex="-1"> \
+					<input type="button"  value="Underline" class="btn btn_mini" name="underline" tabindex="-1"> \
 				</span>';
 
 
@@ -94,7 +95,13 @@ if($(".tagbuttons").size())
 $('.msg_body').each(function(){
     $(this).html($(this).html()
 		.split('&lt;strike&gt;').join('<strike>').split('&lt;/strike&gt;').join('</strike>')
-		.split('&lt;code&gt;').join('<code>').split('&lt;/code&gt;').join('</code>'));
+		.split('&lt;code&gt;').join('<code>').split('&lt;/code&gt;').join('</code>')
+		.split('&lt;cite&gt;').join('<cite>').split('&lt;/cite&gt;').join('</cite>')
+		.split('&lt;spoiler&gt;').join('<s>').split('&lt;/spoiler&gt;').join('</s>')
+		.split('&lt;sp&gt;').join('<s>').split('&lt;/sp&gt;').join('</s>')
+		.split('&lt;quote&gt;').join('<blockquote>').split('&lt;/quote&gt;').join('</blockquote>')
+		.split('&lt;u&gt;').join('<u>').split('&lt;/u&gt;').join('</u>')
+		.split('&lt;qt&gt;').join('<blockquote>').split('&lt;/qt&gt;').join('</blockquote>'));
 });
 
 // sigs

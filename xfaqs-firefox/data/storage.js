@@ -118,12 +118,6 @@ if(	localStorage.getItem("highlightList") != null ) {
 				"userNames": [ "Judgmenl" ] 
 			},
 			
-			{
-				"groupName": "Creator's Alt",
-				"color": "#FFD9D9",
-				"userNames": [ "_SecretDragoon", "1337_FF_GoD" ] 
-			}
-		
 		]
 	};
 	

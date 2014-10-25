@@ -100,7 +100,25 @@ if(	localStorage.getItem("ignoreList") != null ) {
 }
 
 if(	localStorage.getItem("highlightList") != null ) {
-	var highlightList = JSON.parse(localStorage.getItem("highlightList"));
+
+	try {
+		var highlightList = JSON.parse(localStorage.getItem("highlightList"));
+	} catch(e) {
+		var highlightList =
+		{ 	
+			"groups": [
+			
+				{
+					"groupName": "xFAQs Creator",
+					"color": "#FFD9D9",
+					"userNames": [ "Judgmenl" ] 
+				}
+			
+			]
+		};
+		
+		localStorage.setItem("highlightList", JSON.stringify(highlightList));
+	}
 
 } else {
  
@@ -113,12 +131,6 @@ if(	localStorage.getItem("highlightList") != null ) {
 				"groupName": "xFAQs Creator",
 				"color": "#FFD9D9",
 				"userNames": [ "Judgmenl" ] 
-			},
-			
-			{
-				"groupName": "Creator's Alt",
-				"color": "#FFD9D9",
-				"userNames": [ "_SecretDragoon", "1337_FF_GoD" ] 
 			}
 		
 		]
@@ -229,7 +241,7 @@ function sigDeleteCallback(i) {
 }
 
 var aboutBody =
-				"<p>xFAQs v1.0 - GameFAQs Improvements created by <a href='http://www.gamefaqs.com/users/Judgmenl/boards'>Judgmenl</a>.</p>" +
+				"<p>xFAQs v1.03 - GameFAQs Improvements created by <a href='http://www.gamefaqs.com/users/Judgmenl/boards'>Judgmenl</a>.</p>" +
 				"<h3>Credits</h3>" +
 				"<p>Judgmenl (Developer)<br>HellHole_ (Hosting the Chrome version)<br>kirbymuncher (Quick Edit source code) <br>The TTI team for the Text-to-image and Text-to-video concept.</p>" +
 				"<p>The xFAQs site can be located at <a href='http://xfaqs.nostlagiasky.pw/'>nostlagiasky</a>";
@@ -263,8 +275,38 @@ $("#okToSaveSig").click(function() {
 });
 
 
+// Highlight Export Support
+// 2014-10-25
+
+// Highlight Export Widget.
+$("body").append("<div id='highlightWidget' style='display:none'><p>Save this text data in a text file</p><textarea id='hibackup' style='width:100%; height:500px;' readonly>" + JSON.stringify(JSON.parse(localStorage.highlightList),null,"\t") + "</textarea></div>");
+$("#highlightWidget").dialog({
+	 autoOpen: false,
+	 height: "auto",
+	 width: 1100,
+});
+
+// Import Highlight Widget
+$("body").append("<div id='highlightWidgetI' style='display:none'><p>Paste the contents of Export Highlight Data into this box and click Save.</p><textarea id='hiimport' style='width:100%; height:500px;'>" + "" + "</textarea><p><br><button id='okToSaveHi'>Save</button></p></div>");
+$("#highlightWidgetI").dialog({
+	 autoOpen: false,
+	 height: "auto",
+	 width: 1100,
+});
+
+// ok to save highlight
+$("#okToSaveHi").click(function() {
+	var highlightData = $("#hiimport").val();
+	localStorage.setItem("highlightList", highlightData);
+	location.reload(true);
+});
+
+
+
 $("#sigWidget").parent().addClass("reg_dialog");
 $("#sigWidgetI").parent().addClass("reg_dialog");
+$("#highlightWidget").parent().addClass("reg_dialog");
+$("#highlightWidgetI").parent().addClass("reg_dialog");
 $("button").addClass("btn");
 
 var sigNumber = 0;
@@ -298,8 +340,12 @@ for( ignoreNumber; ignoreNumber < ignoreList.users.length; ignoreNumber++) {
 ignoreBody += "</table>";
 
 
-var highlightBody = "<p>Note: No spaces between user names - just commas.</p>" +
-					"<table>" +
+var highlightBody = "Note: No spaces between user names - just commas.";
+
+highlightBody += " <div style='float:right'><button  class='btn btn_primary' id='highlight_export'>Export Highlight Data</button> ";
+highlightBody += " <button class='btn' id='highlight_import'>Import Highlight Data</button></div> ";
+
+highlightBody +=	"<table>" +
 					"<tr><th>Special Highlights</th><th><input style='float:right' type='submit' id='updateHighlightSpecial' class='btn' value='Update Special Highlights'></th></tr>" +
 					"<tr><td>Highlight Topic Creator</td><td><input id='color-tc' value=\"" + tcColor + "\"></td></tr>" +
 					"<tr><td>Highlight Admins</td><td><input id='color-admin' value=\"" + adminColor + "\"></td></tr>" +
@@ -786,14 +832,23 @@ if((decodeURIComponent((new RegExp('[?|&]' + "settings" + '=' + '([^&;]+?)(&|#|;
 
 	});
 	
-	// Signature Export
-	
+	// Signature Export	
 	$("#sig_export").click(function() {
 		$("#sigWidget").dialog("open");
 	});
 	
 	$("#sig_import").click(function() {
 		$("#sigWidgetI").dialog("open");
+	});
+	
+	
+	// highlight export 2014-10-25
+	$("#highlight_export").click(function() {
+		$("#highlightWidget").dialog("open");
+	});
+	
+	$("#highlight_import").click(function() {
+		$("#highlightWidgetI").dialog("open");
 	});
 	
 

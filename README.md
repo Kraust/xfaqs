@@ -6,6 +6,12 @@ With this release all 3 versions (Firefox, Chrome) will be at the same version n
 
 Maxthon support is now going to be minimal as the only person I know that uses Maxthon no longer posts on GameFAQs
 
+**Version 1.0.2**
+* Added New Features: Highlight Export
+* Fixed a bug with TTI where toggles have a large click area.
+* This is primarily an update to add users to the donator list
+* Remove signatures still doesn't default to a value.
+
 **Version 1.0 (Firefox and Chrome)**
 * Added New Feature: Account Switcher
 * Added New Feature: strikeout tags

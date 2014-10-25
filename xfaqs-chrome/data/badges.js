@@ -6,7 +6,7 @@ $(function() {
 
 
 var msgCount = $("td.msg").length;
-var donators = [ "helIy", "King Rial", "-Gavirulax-", "Xero-Apollo", "Kanakiri"];
+var donators = [ "helIy", "King Rial", "-Gavirulax-", "Xero-Apollo", "Kanakiri", "Littlegator", "DespondentDeity", "ArchangelBaruch"];
 var contributors = ["kirbymuncher"];
 
 for( var i = 0; i < msgCount; i++) {

@@ -227,12 +227,12 @@ if (enableAvatars === "checked") {
 				// $(".msg_body").eq(i).css("min-height", "100px");
 
 			}
+			
 
 			$('img').error(function() {
-				$(this).parent().next().css("padding-right", "0px");
-				$(this).parent().next().css("min-height", "100px");		// xfaqs new sigs fix.
-				$(this).remove(); 
+				$(this).remove();
 			});
+
 
 		} else {
 
@@ -261,7 +261,7 @@ if (enableAvatars === "checked") {
 					
 				$('img').error(function() {
 					$(this).parent().next().css("min-height", "0px");		
-					$(this).remove(); 
+					$(this).remove; 
 				});
 
 				}
@@ -271,3 +271,9 @@ if (enableAvatars === "checked") {
 			
 	}
 }
+
+  /*$('img').each(function() {
+    if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+      this.src="";
+    }
+  });*/

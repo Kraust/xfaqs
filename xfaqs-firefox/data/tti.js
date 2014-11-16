@@ -81,7 +81,7 @@ if (enableTTI === "type-2") {
 		var href = $(this).attr("href");
 		var width = $('.msg_body').width();
 		
-		$(this).after(" <button id='tti-" + index +"' class='btn' style='padding-left:3px;padding-right:3px;padding-top:1px;padding-bottom:1px;'><i class='icon icon-picture'></i></button><br><a href='" + href + "'><img id='tti-image-" + index + "' src='" + href + "' alt='TTI Image' style=''></a>");
+		$(this).after(" <button id='tti-" + index +"' class='btn' style='padding-left:3px;padding-right:3px;padding-top:1px;padding-bottom:1px;'><i class='icon icon-picture'></i></button><img id='tti-image-" + index + "' src='" + href + "' alt='TTI Image' style='display:block'>");
 		
 		$("#tti-image-" + index).css("max-width", width);
 
@@ -99,7 +99,7 @@ if (enableTTI === "type-2") {
 		var href = $(this).attr("href");
 		var width = $('.sig').width();
 		
-		$(this).after(" <button id='stti-" + index +"' class='btn' style='padding-left:3px;padding-right:3px;padding-top:1px;padding-bottom:1px;'><i class='icon icon-picture'></i></button><br><a href='" + href + "'><img id='stti-image-" + index + "' src='" + href + "' alt='TTI Image' style=''></a>");
+		$(this).after(" <button id='stti-" + index +"' class='btn' style='padding-left:3px;padding-right:3px;padding-top:1px;padding-bottom:1px;'><i class='icon icon-picture'></i></button><img id='stti-image-" + index + "' src='" + href + "' alt='TTI Image' style='display:block'>");
 		
 		$("#stti-image-" + index).css("max-width", width);
 

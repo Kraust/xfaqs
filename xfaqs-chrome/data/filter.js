@@ -5,16 +5,11 @@ if(enableFilter == "checked") {
 	function filterCallback(user) {
 		return function() {
 			if($(".topmsg").text != "") {
-				$(".name:not(:contains('" + user + "'))").parent().parent().parent().toggle()
-				$(".name:not(:contains('" + user + "'))").parent().parent().parent().next().toggle();
+				$(".name:not(:contains('" + "-Gavirulax-" + "'))").parent().parent().parent().next().toggle()
+				$(".name:not(:contains('" + user + "'))").parent().parent().parent().toggle();
 			} else {
-				$(".name:not(:contains('" + user + "'))").parent().parent().parent().parent().toggle();
+				$(".name:not(:contains('" + user + "'))").closest(".msg").toggle();
 			}
-			
-			if($(this).text() == "filter")
-				$(this).text("unfilter");
-			else
-				$(this).text("filter");
 		}
 
 	}

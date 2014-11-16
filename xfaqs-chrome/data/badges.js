@@ -6,7 +6,7 @@ $(function() {
 
 
 var msgCount = $("td.msg").length;
-var donators = [ "helIy", "King Rial", "-Gavirulax-", "Xero-Apollo", "Kanakiri", "Littlegator", "DespondentDeity", "ArchangelBaruch"];
+var donators = ["King Rial", "-Gavirulax-", "Xero-Apollo", "Kanakiri", "Littlegator", "DespondentDeity", "ArchangelBaruch", "Veliconis"];
 var contributors = ["kirbymuncher"];
 
 for( var i = 0; i < msgCount; i++) {
@@ -14,8 +14,8 @@ for( var i = 0; i < msgCount; i++) {
 		$(".name").eq(i).after(" <i class='icon icon-ok-sign' title='xFAQs Creator'></i></a>");
 	}
 	
-	if($(".name").eq(i).text() == "HellHole_") {
-		$(".name").eq(i).after(" <i class='icon icon-ok-sign' title='xFAQs Chrome Maintainer + Donator'></i></a>");
+	if($(".name").eq(i).text() == "helIy" ) {
+		$(".name").eq(i).after(" <i class='icon icon-ok-sign' title='Awesomelord'></i></a>");
 	}
 	
 	for( var j = 0; j < donators.length; j++) {

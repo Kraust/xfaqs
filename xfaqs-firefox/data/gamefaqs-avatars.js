@@ -261,7 +261,7 @@ if (enableAvatars === "checked") {
 					
 				$('img').error(function() {
 					$(this).parent().next().css("min-height", "0px");		
-					$(this).remove(); 
+					$(this).remove; 
 				});
 
 				}
